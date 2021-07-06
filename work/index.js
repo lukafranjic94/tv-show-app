@@ -1,3 +1,13 @@
+class Review {
+	constructor(body, rating) {
+		this.body = body;
+		this.rating = rating;
+	}
+}
+
+const storedReviews = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1)]
+updateAverageRating(storedReviews)
+
 const form = document.querySelector('#review-form');
 form.addEventListener('submit', (event) => {
 	event.preventDefault();
@@ -14,16 +24,17 @@ form.addEventListener('submit', (event) => {
 	newReview.appendChild(newReviewBody);
 	newReview.appendChild(newReviewRating);
 	reviews.appendChild(newReview);
+	storedReviews.push(new Review(reviewBody, parseInt(reviewRating)));
+	updateAverageRating(storedReviews)
 });
 
-class Review {
-	constructor(body, rating) {
-		this.body = body;
-		this.rating = rating;
-	}
+function updateAverageRating(reviews) {
+	const averageRating = document.querySelector('#average-rating');
+	const average = reviews.map(x => x.rating).reduce((accumulator, currentValue) => accumulator + currentValue) / reviews.length;
+	averageRating.textContent = average.toFixed(2);
 }
 
-const storedReviews = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1)]
+
 const reviews = document.querySelector('#reviews')
 storedReviews.forEach(review => {
 	const newReview = document.createElement('div');
