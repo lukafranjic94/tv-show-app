@@ -4,14 +4,37 @@
 <head>
 	<title>v1.1</title>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 	<div id="content">
 		<h1 id="page-title">TV SHOWS APP</h1>
-		<div id="show-info"></div>
-		<div id="review-create"></div>
+		<div id="show-info">
+			<div id="show-text">
+				<h2 id="show-title">MONTY PYTHON'S FLYING CIRCUS</h2>
+				<p>
+					Monty Python’s Flying Circus (also known as simply Monty Python; sometimes abbreviated MPFC) is a British
+					surreal sketch comedy series created by and starring the comedy group Monty Python, consisting of Graham
+					Chapman, John Cleese, Eric Idle, Terry Jones, Michael Palin and Terry Gilliam, aka the "Pythons". The first
+					episode was recorded at the BBC on 7 September 1969 and premiered on 5 October on BBC1, with 45 episodes
+					airing over four series from 1969 to 1974, plus two episodes for German TV.
+				</p>
+			</div>
+			<div id="show-image"></div>
+			<img
+				src="https://m.media-amazon.com/images/M/MV5BMWY2ZGI0OGUtZDc3YS00ZmVjLWJiNWQtZDdmNzFmM2UzYWFhXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg"
+				alt="" srcset="" />
+		</div>
+		<div id="review-create">
+			<h2>Reviews</h2>
+			<form>
+				<textarea name="review-body" id="review-body" rows="2" placeholder="Add review"></textarea>
+				<label for="review-rating">Rating</label>
+				<input type="number" name="review-rating" id="review-rating">
+				<button type="submit">Post</button>
+			</form>
+		</div>
 		<div id="reviews"></div>
 	</div>
 </body>
