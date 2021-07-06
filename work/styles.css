@@ -1,0 +1,43 @@
+#content {
+	width: 70%;
+	margin: 0 auto;
+}
+
+body {
+	background-color: darkslateblue;
+}
+
+#page-title {
+	color: white;
+}
+
+#show-info {
+	background-color: white;
+	color: darkslateblue;
+	display: flex;
+}
+
+#review-create {
+	color: white;
+}
+
+#review-body {
+	width: 100%;
+}
+
+#show-image {
+	padding: 0;
+}
+
+#show-image img {
+	width: 100%;
+}
+
+#review-rating {
+	margin-top: 20px;
+}
+
+#review-create button {
+	margin-top: 20px;
+	display: block;
+}
