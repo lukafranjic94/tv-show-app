@@ -15,3 +15,25 @@ form.addEventListener('submit', (event) => {
 	newReview.appendChild(newReviewRating);
 	reviews.appendChild(newReview);
 });
+
+class Review {
+	constructor(body, rating) {
+		this.body = body;
+		this.rating = rating;
+	}
+}
+
+const storedReviews = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1)]
+const reviews = document.querySelector('#reviews')
+storedReviews.forEach(review => {
+	const newReview = document.createElement('div');
+	const newReviewBody = document.createElement('p');
+	const newReviewRating = document.createElement('p');
+
+	newReviewBody.textContent = review.body;
+	newReviewRating.textContent = `${review.rating}/5`
+	newReview.classList.add("review")
+	newReview.appendChild(newReviewBody);
+	newReview.appendChild(newReviewRating);
+	reviews.appendChild(newReview);
+})
