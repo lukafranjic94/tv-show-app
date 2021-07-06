@@ -41,3 +41,14 @@ body {
 	margin-top: 20px;
 	display: block;
 }
+
+.review {
+	margin-top: 20px;
+	color: white;
+	background-color: slateblue;
+	padding: 10px 0px 10px 20px;
+}
+
+#reviews {
+	margin-bottom: 50px;
+}

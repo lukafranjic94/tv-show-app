@@ -29,15 +29,16 @@
 		</div>
 		<div id="review-create">
 			<h2>Reviews</h2>
-			<form>
+			<form id="review-form">
 				<textarea name="review-body" id="review-body" rows="3" placeholder="Add review"></textarea>
 				<label for="review-rating">Rating</label>
-				<input type="number" name="review-rating" id="review-rating">
+				<input type="number" min="1" max="5" name="review-rating" id="review-rating">
 				<button type="submit">Post</button>
 			</form>
 		</div>
 		<div id="reviews"></div>
 	</div>
+	<script src="index.js"></script>
 </body>
 
 </html>
