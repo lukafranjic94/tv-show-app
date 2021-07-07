@@ -22,7 +22,7 @@ function createReviewElement(body, rating) {
 		localStorage.setItem('storedReviews', JSON.stringify(storedReviews));
 		updateAverageRating();
 		reviews.removeChild(parentReview);
-	})
+	});
 	newReviewBody.textContent = body;
 	newReviewRating.textContent = `${rating}/5`;
 	newReview.classList.add('review');
@@ -43,6 +43,28 @@ function updateAverageRating() {
 	averageRating.textContent = average.toFixed(2);
 }
 
+function addReviewInputListeners() {
+	const reviewBodyInput = document.querySelector('#review-body');
+	const reviewBodyAlert = document.querySelector('#review-body-alert');
+	reviewBodyInput.addEventListener('input', event => {
+		if (event.currentTarget.value.trim()) {
+			reviewBodyAlert.classList.add('invisible');
+		} else {
+			reviewBodyAlert.classList.remove('invisible');
+		}
+	});
+
+	const reviewRatingInput = document.querySelector('#review-rating');
+	const reviewRatingAlert = document.querySelector('#review-rating-alert')
+	reviewRatingInput.addEventListener('input', event => {
+		if (event.currentTarget.value && event.currentTarget.value >= 1 && event.currentTarget.value <= 5) {
+			reviewRatingAlert.classList.add('invisible');
+		} else {
+			reviewRatingAlert.classList.remove('invisible');
+		}
+	});
+}
+
 function clearInput() {
 	const reviewBody = document.querySelector('#review-body');
 	const reviewBodyAlert = document.querySelector('#review-body-alert');
@@ -56,20 +78,7 @@ function clearInput() {
 
 }
 
-function initialize() {
-	if (!localStorage.getItem('storedReviews')) {
-		const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
-		localStorage.setItem('storedReviews', JSON.stringify(reviewArray));
-	}
-	updateAverageRating();
-
-	const reviews = document.querySelector('#reviews');
-	const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
-	storedReviews.forEach(review => {
-		const newReview = createReviewElement(review.body, review.rating);
-		reviews.appendChild(newReview);
-	})
-
+function addFormSubmitListener() {
 	const form = document.querySelector('#review-form');
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
@@ -99,6 +108,23 @@ function initialize() {
 		clearInput();
 	});
 
+}
+
+function initialize() {
+	if (!localStorage.getItem('storedReviews')) {
+		const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
+		localStorage.setItem('storedReviews', JSON.stringify(reviewArray));
+	}
+	updateAverageRating();
+
+	const reviews = document.querySelector('#reviews');
+	const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
+	storedReviews.forEach(review => {
+		const newReview = createReviewElement(review.body, review.rating);
+		reviews.appendChild(newReview);
+	});
+	addReviewInputListeners();
+	addFormSubmitListener();
 }
 
 initialize();
