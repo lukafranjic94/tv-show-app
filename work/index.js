@@ -35,6 +35,10 @@ function createReviewElement(body, rating) {
 function updateAverageRating() {
 	const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
 	const averageRating = document.querySelector('#average-rating');
+	if (storedReviews.length === 0) {
+		averageRating.textContent = 'Not yet rated';
+		return;
+	}
 	const average = storedReviews.map(x => x.rating).reduce((accumulator, currentValue) => accumulator + currentValue) / storedReviews.length;
 	averageRating.textContent = average.toFixed(2);
 }
