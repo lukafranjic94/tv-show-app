@@ -58,7 +58,13 @@ function initialize() {
 		event.preventDefault();
 		const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
 		const reviewBody = document.querySelector('#review-body').value;
+		if (!reviewBody.trim()) {
+			return;
+		}
 		const reviewRating = document.querySelector('#review-rating').value;
+		if (!reviewRating || (reviewRating < 1 || reviewRating > 5)) {
+			return;
+		}
 		const newReview = createReviewElement(reviewBody, reviewRating)
 
 		reviews.appendChild(newReview);
