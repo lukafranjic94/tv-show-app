@@ -9,10 +9,10 @@ function createReviewElement(body, rating) {
 	const newReview = document.createElement('div');
 	const newReviewBody = document.createElement('p');
 	const newReviewRating = document.createElement('p');
-	const newReviewDeleteButton = document.createElement('button')
+	const newReviewDeleteButton = document.createElement('button');
 
-	newReviewDeleteButton.id = '#delete-button'
-	newReviewDeleteButton.textContent = 'Remove'
+	newReviewDeleteButton.id = '#delete-button';
+	newReviewDeleteButton.textContent = 'Remove';
 	newReviewDeleteButton.addEventListener('click', (event) => {
 		const parentReview = event.currentTarget.parentNode;
 		const reviews = parentReview.parentNode;
@@ -20,12 +20,12 @@ function createReviewElement(body, rating) {
 		const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
 		storedReviews.splice(index, 1);
 		localStorage.setItem('storedReviews', JSON.stringify(storedReviews));
-		updateAverageRating()
+		updateAverageRating();
 		reviews.removeChild(parentReview);
 	})
-	newReviewBody.textContent = body
-	newReviewRating.textContent = `${rating}/5`
-	newReview.classList.add('review')
+	newReviewBody.textContent = body;
+	newReviewRating.textContent = `${rating}/5`;
+	newReview.classList.add('review');
 	newReview.appendChild(newReviewBody);
 	newReview.appendChild(newReviewRating);
 	newReview.appendChild(newReviewDeleteButton);
@@ -55,14 +55,14 @@ function clearInput() {
 function initialize() {
 	if (!localStorage.getItem('storedReviews')) {
 		const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
-		localStorage.setItem('storedReviews', JSON.stringify(reviewArray))
+		localStorage.setItem('storedReviews', JSON.stringify(reviewArray));
 	}
-	updateAverageRating()
+	updateAverageRating();
 
-	const reviews = document.querySelector('#reviews')
+	const reviews = document.querySelector('#reviews');
 	const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
 	storedReviews.forEach(review => {
-		const newReview = createReviewElement(review.body, review.rating)
+		const newReview = createReviewElement(review.body, review.rating);
 		reviews.appendChild(newReview);
 	})
 
@@ -76,7 +76,7 @@ function initialize() {
 		const reviewRatingAlert = document.querySelector('#review-rating-alert');
 		const reviewRating = document.querySelector('#review-rating').value;
 		if (!reviewBody.trim()) {
-			reviewBodyAlert.classList.remove('invisible')
+			reviewBodyAlert.classList.remove('invisible');
 			submitOk = false;
 		}
 		if (!reviewRating || (reviewRating < 1 || reviewRating > 5)) {
@@ -86,13 +86,13 @@ function initialize() {
 		if (!submitOk) {
 			return;
 		}
-		const newReview = createReviewElement(reviewBody, reviewRating)
+		const newReview = createReviewElement(reviewBody, reviewRating);
 
 		reviews.appendChild(newReview);
 		storedReviews.push(new Review(reviewBody, parseInt(reviewRating)));
 		localStorage.setItem('storedReviews', JSON.stringify(storedReviews));
-		updateAverageRating()
-		clearInput()
+		updateAverageRating();
+		clearInput();
 	});
 
 }
