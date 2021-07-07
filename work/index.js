@@ -39,6 +39,19 @@ function updateAverageRating() {
 	averageRating.textContent = average.toFixed(2);
 }
 
+function clearInput() {
+	const reviewBody = document.querySelector('#review-body');
+	const reviewBodyAlert = document.querySelector('#review-body-alert');
+	const reviewRatingAlert = document.querySelector('#review-rating-alert');
+	const reviewRating = document.querySelector('#review-rating');
+
+	reviewBody.value = '';
+	reviewRating.value = '';
+	reviewBodyAlert.classList.add('invisible');
+	reviewRatingAlert.classList.add('invisible');
+
+}
+
 function initialize() {
 	if (!localStorage.getItem('storedReviews')) {
 		const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
@@ -56,13 +69,21 @@ function initialize() {
 	const form = document.querySelector('#review-form');
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
+		let submitOk = true;
 		const storedReviews = JSON.parse(localStorage.getItem('storedReviews'));
 		const reviewBody = document.querySelector('#review-body').value;
-		if (!reviewBody.trim()) {
-			return;
-		}
+		const reviewBodyAlert = document.querySelector('#review-body-alert');
+		const reviewRatingAlert = document.querySelector('#review-rating-alert');
 		const reviewRating = document.querySelector('#review-rating').value;
+		if (!reviewBody.trim()) {
+			reviewBodyAlert.classList.remove('invisible')
+			submitOk = false;
+		}
 		if (!reviewRating || (reviewRating < 1 || reviewRating > 5)) {
+			reviewRatingAlert.classList.remove('invisible');
+			submitOk = false;
+		}
+		if (!submitOk) {
 			return;
 		}
 		const newReview = createReviewElement(reviewBody, reviewRating)
@@ -71,6 +92,7 @@ function initialize() {
 		storedReviews.push(new Review(reviewBody, parseInt(reviewRating)));
 		localStorage.setItem('storedReviews', JSON.stringify(storedReviews));
 		updateAverageRating()
+		clearInput()
 	});
 
 }

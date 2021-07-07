@@ -32,8 +32,10 @@
 			<h2>Reviews</h2>
 			<form id="review-form">
 				<textarea name="review-body" id="review-body" rows="3" placeholder="Add review"></textarea>
+				<div class="alert invisible" id="review-body-alert">Please enter a review</div>
 				<label for="review-rating">Rating</label>
 				<input type="number" min="1" max="5" name="review-rating" id="review-rating">
+				<div class="alert invisible" id="review-rating-alert">Please enter a number between 1 and 5</div>
 				<button type="submit">Post</button>
 			</form>
 		</div>

@@ -36,6 +36,14 @@ body {
 	font-size: 12pt;
 }
 
+.alert {
+	color: red;
+}
+
+.invisible {
+	display: none;
+}
+
 #show-image {
 	padding: 0;
 }
