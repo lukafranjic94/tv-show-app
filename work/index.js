@@ -40,8 +40,10 @@ function updateAverageRating() {
 }
 
 function initialize() {
-	const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
-	localStorage.setItem('storedReviews', JSON.stringify(reviewArray))
+	if (!localStorage.getItem('storedReviews')) {
+		const reviewArray = [new Review('bongland humor lol', 3), new Review('not my cup of tea', 1), new Review('amazing', 5)];
+		localStorage.setItem('storedReviews', JSON.stringify(reviewArray))
+	}
 	updateAverageRating()
 
 	const reviews = document.querySelector('#reviews')
