@@ -1,0 +1,109 @@
+#content {
+	width: 70%;
+	margin: 0 auto;
+}
+
+body {
+	background-color: darkslateblue;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#page-title {
+	color: white;
+}
+
+#show-info {
+	background-color: white;
+	color: darkslateblue;
+	display: flex;
+	border-radius: 25px;
+}
+
+#show-text {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#review-create {
+	color: white;
+}
+
+#review-body {
+	width: 100%;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	font-size: 12pt;
+}
+
+.alert {
+	color: red;
+}
+
+.invisible {
+	display: none;
+}
+
+#show-image {
+	padding: 0;
+}
+
+#show-image img {
+	width: 100%;
+	height: 100%;
+	border-radius: 25px;
+}
+
+#review-rating {
+	margin-top: 20px;
+	width: 50px;
+	border-radius: 10px;
+	margin-left: 10px;
+	font-size: 12pt;
+}
+
+#review-form label {
+	font-size: 14pt;
+}
+
+#review-form button {
+	padding: 10px 25px 10px 25px;
+	border-radius: 15px;
+	color: darkslateblue;
+	font-size: 12pt;
+	text-transform: uppercase;
+	margin-top: 20px;
+	display: block;
+	cursor: pointer;
+}
+
+#review-form button:hover {
+	color: white;
+	background-color: darkslateblue;
+}
+
+.review {
+	margin-top: 20px;
+	color: white;
+	background-color: slateblue;
+	padding: 10px 0px 10px 20px;
+	border-radius: 25px;
+	font-size: 12pt;
+}
+
+.review button {
+	padding: 5px 15px 5px 15px;
+	border-radius: 10px;
+	text-transform: uppercase;
+	color: darkslateblue;
+	cursor: pointer;
+}
+
+.review button:hover {
+	color: white;
+	background-color: darkslateblue;
+}
+
+#reviews {
+	margin-bottom: 50px;
+}
