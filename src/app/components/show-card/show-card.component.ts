@@ -8,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class ShowCardComponent implements OnInit {
 	@Input() title: string;
-	@Input() averageRating: string;
+	@Input() averageRating: number;
 	@Input() imageUrl: string;
 
 	constructor() {}
