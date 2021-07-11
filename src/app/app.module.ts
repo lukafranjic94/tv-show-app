@@ -11,6 +11,7 @@ import { ShowListComponent } from './components/show-list/show-list.component';
 import { AllShowsContainerComponent } from './pages/all-shows-container/all-shows-container.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 		AllShowsContainerComponent,
 		MainLayoutComponent,
 	],
-	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule],
+	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
