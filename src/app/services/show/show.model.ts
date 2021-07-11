@@ -10,6 +10,7 @@ export class Show {
 		this.imageUrl = rawShow.image_url;
 	}
 	calcPercentageRating(): number {
-		return (this.averageRating / 5) * 100;
+		const percentageRating: number = (100 * (this.averageRating - 1)) / (5 - 1);
+		return percentageRating;
 	}
 }
