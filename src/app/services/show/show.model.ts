@@ -9,4 +9,7 @@ export class Show {
 		this.averageRating = rawShow.average_rating;
 		this.imageUrl = rawShow.image_url;
 	}
+	calcPercentageRating(): number {
+		return (this.averageRating / 5) * 100;
+	}
 }
