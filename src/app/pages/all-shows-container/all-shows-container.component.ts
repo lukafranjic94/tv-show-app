@@ -28,7 +28,7 @@ export class AllShowsContainerComponent implements OnInit {
 			title: 'General',
 			description:
 				'rati životnu pripovijest hrvatskog ratnog junaka, generala Ante Gotovine. Sniman je na lokacijama u Zagrebu, Šibeniku i Livnu. Snimljen je u koprodukciji tvrtke Kiklop film i HRT-a, a podržan je od strane Hrvatskog audiovizualnog centra. Smatra ga se najočekivanijim hrvatskim filmom svih vremena.',
-			average_rating: 4.7,
+			average_rating: 2.5,
 			image_url:
 				'https://www.croatiaweek.com/wp-content/uploads/2019/07/MV5BZmMxYWM3NjAtYjcyZS00ZTEzLTg4ZjctMDY3NDEwYTY0MjQzXkEyXkFqcGdeQXVyNzQwNzQwMjA@._V1_SY1000_CR006951000_AL_.jpg?x61649',
 		},
