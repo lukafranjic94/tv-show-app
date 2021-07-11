@@ -39,6 +39,10 @@ export class AllShowsContainerComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit(): void {
-		this.shows = this.rawShows.map((rawShow) => new Show(rawShow));
+		this.shows = this.rawShows.map((rawShow) => {
+			const newShow = new Show(rawShow);
+			console.log(`${newShow.title} ima rating ${newShow.calcPercentageRating()}%`);
+			return newShow;
+		});
 	}
 }
