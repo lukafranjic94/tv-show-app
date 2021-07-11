@@ -13,5 +13,9 @@ export class ShowCardComponent implements OnInit {
 
 	constructor() {}
 
+	logTitle(): void {
+		console.log(this.title);
+	}
+
 	ngOnInit(): void {}
 }
