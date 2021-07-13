@@ -13,6 +13,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
+import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 		ShowListComponent,
 		AllShowsContainerComponent,
 		MainLayoutComponent,
+  TopRatedContainerComponent,
 	],
 	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, AppRoutingModule],
 	providers: [],
