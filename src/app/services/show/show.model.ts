@@ -1,10 +1,12 @@
+import { IRawShow } from 'src/app/interfaces/rawShow.interface';
+
 export class Show {
 	title: string;
 	description: string;
 	averageRating: number;
 	imageUrl: string;
 	id: string;
-	constructor(rawShow: any) {
+	constructor(rawShow: IRawShow) {
 		this.title = rawShow.title;
 		this.description = rawShow.description;
 		this.averageRating = rawShow.average_rating;
