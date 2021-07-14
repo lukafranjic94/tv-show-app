@@ -3,7 +3,7 @@
 		<mat-card-title>{{ show.title }}</mat-card-title>
 	</mat-card-header>
 	<img [src]="show.imageUrl" />
-	<mat-card-content>
+	<mat-card-content class="description">
 		<p>{{ show.description }}</p>
 		<app-rating [rating]="show.averageRating"></app-rating>
 	</mat-card-content>
