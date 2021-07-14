@@ -7,13 +7,13 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowCardComponent implements OnInit {
-	@Input() title: string;
-	@Input() averageRating: number;
-	@Input() imageUrl: string;
+	@Input() public title: string;
+	@Input() public averageRating: number;
+	@Input() public imageUrl: string;
 
 	constructor() {}
 
-	logTitle(): void {
+	public logTitle(): void {
 		console.log(this.title);
 	}
 

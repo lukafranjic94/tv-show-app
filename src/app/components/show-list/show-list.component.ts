@@ -8,7 +8,7 @@ import { Show } from 'src/app/services/show/show.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowListComponent implements OnInit {
-	@Input() shows: Array<Show>;
+	@Input() public shows: Array<Show>;
 
 	constructor() {}
 
