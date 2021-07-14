@@ -14,6 +14,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
+import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
+import { ShowDetailsComponent } from './pages/show-details-container/components/show-details/show-details.component';
 
 @NgModule({
 	declarations: [
@@ -25,6 +27,8 @@ import { TopRatedContainerComponent } from './pages/top-rated-container/top-rate
 		AllShowsContainerComponent,
 		MainLayoutComponent,
   TopRatedContainerComponent,
+  ShowDetailsContainerComponent,
+  ShowDetailsComponent,
 	],
 	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, AppRoutingModule],
 	providers: [],

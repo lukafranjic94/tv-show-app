@@ -1,0 +1,10 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>{{ show.title }}</mat-card-title>
+	</mat-card-header>
+	<img [src]="show.imageUrl" />
+	<mat-card-content>
+		<p>{{ show.description }}</p>
+		<app-rating [rating]="show.averageRating"></app-rating>
+	</mat-card-content>
+</mat-card>
