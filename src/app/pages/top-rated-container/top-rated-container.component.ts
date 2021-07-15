@@ -3,17 +3,17 @@ import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
 @Component({
-	selector: 'app-all-shows-container',
-	templateUrl: './all-shows-container.component.html',
-	styleUrls: ['./all-shows-container.component.scss'],
+	selector: 'app-top-rated-container',
+	templateUrl: './top-rated-container.component.html',
+	styleUrls: ['./top-rated-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AllShowsContainerComponent implements OnInit {
+export class TopRatedContainerComponent implements OnInit {
 	public shows: Array<Show>;
 
 	constructor(private showService: ShowService) {}
 
 	ngOnInit(): void {
-		this.shows = this.showService.getShows();
+		this.shows = this.showService.getTopRated();
 	}
 }

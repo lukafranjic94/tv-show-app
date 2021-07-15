@@ -12,6 +12,10 @@ import { AllShowsContainerComponent } from './pages/all-shows-container/all-show
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { AppRoutingModule } from './app-routing.module';
+import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
+import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
+import { ShowDetailsComponent } from './pages/show-details-container/components/show-details/show-details.component';
 
 @NgModule({
 	declarations: [
@@ -22,8 +26,11 @@ import { MatIconModule } from '@angular/material/icon';
 		ShowListComponent,
 		AllShowsContainerComponent,
 		MainLayoutComponent,
+  TopRatedContainerComponent,
+  ShowDetailsContainerComponent,
+  ShowDetailsComponent,
 	],
-	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule],
+	imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatSidenavModule, MatIconModule, AppRoutingModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })
