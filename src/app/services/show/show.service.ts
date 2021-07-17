@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Review } from '../review/review.model';
@@ -46,17 +46,14 @@ export class ShowService {
 	}
 
 	public getShows(): Observable<Array<Show>> {
-		return this.reviewService.getReviews().pipe(
-			switchMap((reviews: Array<Review>) => {
-				return of(this.shows).pipe(
-					delay(1000 + Math.random() * 1000),
-					map((shows: Array<Show>) => {
-						shows.forEach((show: Show) => {
-							show.reviews = reviews.filter((review: Review) => review.showId === show.id);
-						});
-						return shows;
-					})
-				);
+		let reviews$: Observable<Array<Review>> = this.reviewService.getReviews();
+		let shows$: Observable<Array<Show>> = of(this.shows).pipe(delay(1000 + Math.random() * 1000));
+		return combineLatest([reviews$, shows$]).pipe(
+			map(([reviews, shows]: [Review[], Show[]]) => {
+				shows.forEach((show: Show) => {
+					show.reviews = reviews.filter((review: Review) => review.showId === show.id);
+				});
+				return shows;
 			})
 		);
 	}
