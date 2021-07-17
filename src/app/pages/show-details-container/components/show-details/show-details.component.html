@@ -9,4 +9,5 @@
 	</mat-card-content>
 </mat-card>
 
+<div *ngIf="show.reviews.length === 0">No reviews yet</div>
 <app-review-list [reviews]="show.reviews"></app-review-list>
