@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Show } from './show.model';
 
@@ -37,15 +39,19 @@ export class ShowService {
 
 	constructor() {}
 
-	public getShows(): Array<Show> {
+	private get shows(): Array<Show> {
 		return this.rawShows.map((rawShow: IRawShow) => new Show(rawShow));
 	}
 
-	public getTopRated(): Array<Show> {
-		return this.getShows().filter((show: Show) => show.averageRating > 4);
+	public getShows(): Observable<Array<Show>> {
+		return of(this.shows).pipe(delay(1000 + Math.random() * 1000));
 	}
 
-	public getShow(id: String): Show | undefined {
-		return this.getShows().find((show: Show) => show.id === id);
+	public getTopRated(): Observable<Array<Show>> {
+		return this.getShows().pipe(map((shows: Array<Show>) => shows.filter((show: Show) => show.averageRating > 4)));
+	}
+
+	public getShow(id: string): Observable<Show | undefined> {
+		return this.getShows().pipe(map((shows: Array<Show>) => shows.find((show: Show) => show.id === id)));
 	}
 }
