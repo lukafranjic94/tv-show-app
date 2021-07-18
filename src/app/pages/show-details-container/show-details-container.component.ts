@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { catchError, retry, switchMap } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -13,6 +13,7 @@ import { ShowService } from 'src/app/services/show/show.service';
 })
 export class ShowDetailsContainerComponent implements OnInit {
 	public show$: Observable<Show | undefined>;
+	public errorObject: Error | null;
 	constructor(private showService: ShowService, private route: ActivatedRoute) {}
 
 	ngOnInit(): void {
@@ -20,7 +21,13 @@ export class ShowDetailsContainerComponent implements OnInit {
 			switchMap((paramMap: ParamMap) => {
 				const id: string | null = paramMap.get('id');
 				if (id) {
-					return this.showService.getShow(id);
+					return this.showService.getShow(id).pipe(
+						retry(1),
+						catchError((error: Error) => {
+							this.errorObject = error;
+							return of(undefined);
+						})
+					);
 				}
 				return of(undefined);
 			})

@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
 
@@ -10,11 +11,17 @@ import { ShowService } from 'src/app/services/show/show.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllShowsContainerComponent implements OnInit {
-	public shows$: Observable<Array<Show>>;
+	public shows$: Observable<Array<Show> | undefined>;
+	public errorObject: Error | null = null;
 
 	constructor(private showService: ShowService) {}
-
 	ngOnInit(): void {
-		this.shows$ = this.showService.getShows();
+		this.shows$ = this.showService.getShows().pipe(
+			retry(1),
+			catchError((error: Error) => {
+				this.errorObject = error;
+				return of(undefined);
+			})
+		);
 	}
 }
