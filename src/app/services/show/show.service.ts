@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, throwError } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
 import { Review } from '../review/review.model';
@@ -53,6 +53,10 @@ export class ShowService {
 				shows.forEach((show: Show) => {
 					show.reviews = reviews.filter((review: Review) => review.showId === show.id);
 				});
+				let rndNum: number = Math.random();
+				if (rndNum >= 0.9) {
+					throw new Error('error message');
+				}
 				return shows;
 			})
 		);
