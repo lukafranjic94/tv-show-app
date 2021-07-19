@@ -40,7 +40,22 @@ export class ReviewService {
 	}
 
 	public getReviews(): Observable<Array<Review>> {
-		return of(this.reviews).pipe(delay(1000 + Math.random() * 1000));
+		return of(this.reviews).pipe(
+			delay(1000 + Math.random() * 1000),
+			map((reviews: Array<Review>) => {
+				let rndNum: number = Math.random();
+				if (rndNum >= 0.9) {
+					throw new Error('error message');
+				}
+				return reviews;
+			})
+		);
+	}
+
+	public getReviewsForShowId(showId: string): Observable<Array<Review>> {
+		return this.getReviews().pipe(
+			map((reviews: Array<Review>) => reviews.filter((review: Review) => review.showId === showId))
+		);
 	}
 
 	constructor() {}

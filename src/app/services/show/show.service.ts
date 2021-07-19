@@ -46,13 +46,9 @@ export class ShowService {
 	}
 
 	public getShows(): Observable<Array<Show>> {
-		let reviews$: Observable<Array<Review>> = this.reviewService.getReviews();
-		let shows$: Observable<Array<Show>> = of(this.shows).pipe(delay(1000 + Math.random() * 1000));
-		return combineLatest([reviews$, shows$]).pipe(
-			map(([reviews, shows]: [Review[], Show[]]) => {
-				shows.forEach((show: Show) => {
-					show.reviews = reviews.filter((review: Review) => review.showId === show.id);
-				});
+		return of(this.shows).pipe(
+			delay(1000 + Math.random() * 1000),
+			map((shows: Array<Show>) => {
 				let rndNum: number = Math.random();
 				if (rndNum >= 0.9) {
 					throw new Error('error message');
