@@ -21,6 +21,7 @@ import { ReviewListComponent } from './pages/show-details-container/components/r
 import { ReviewComponent } from './pages/show-details-container/components/review/review.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { FormLayoutComponent } from './components/form-layout/form-layout.component';
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 		ReviewComponent,
   ErrorComponent,
   LoadingComponent,
+  FormLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
