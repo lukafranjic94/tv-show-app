@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +24,10 @@ import { ReviewComponent } from './pages/show-details-container/components/revie
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { FormLayoutComponent } from './components/form-layout/form-layout.component';
+import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
+import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -37,9 +43,11 @@ import { FormLayoutComponent } from './components/form-layout/form-layout.compon
 		ShowDetailsComponent,
 		ReviewListComponent,
 		ReviewComponent,
-  ErrorComponent,
-  LoadingComponent,
-  FormLayoutComponent,
+		ErrorComponent,
+		LoadingComponent,
+		FormLayoutComponent,
+		RegistrationContainerComponent,
+		RegistrationFormComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -49,6 +57,10 @@ import { FormLayoutComponent } from './components/form-layout/form-layout.compon
 		MatIconModule,
 		AppRoutingModule,
 		MatProgressSpinnerModule,
+		MatFormFieldModule,
+		MatInputModule,
+		ReactiveFormsModule,
+		HttpClientModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

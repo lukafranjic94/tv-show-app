@@ -1,0 +1,27 @@
+<mat-card>
+	<form [formGroup]="registrationFormGroup">
+		<mat-form-field appearance="fill">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email" />
+			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.required">Email is required!</mat-error>
+			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.email">Please enter a valid email</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Password</mat-label>
+			<input matInput formControlName="password" />
+			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.required">Password is required!</mat-error>
+			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.minlength">Password should be at least 8
+				characters long!</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Password confirmation</mat-label>
+			<input matInput formControlName="passwordConfirmation" />
+		</mat-form-field>
+
+		<button mat-raised-button (click)="onRegister()" [disabled]="registrationFormGroup.invalid">Register</button>
+
+		<p>Go to <a routerLink="">all shows</a></p>
+	</form>
+</mat-card>
