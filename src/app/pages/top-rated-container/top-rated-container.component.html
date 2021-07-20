@@ -1,1 +1,12 @@
-<app-show-list [shows]="shows"></app-show-list>
+<ng-container *ngIf="shows$ | async as shows; else loadingOrError">
+	<app-show-list [shows]="shows"></app-show-list>
+</ng-container>
+
+<ng-template #loadingOrError>
+	<ng-container *ngIf="errorObject; else loading">
+		<app-error></app-error>
+	</ng-container>
+	<ng-template #loading>
+		<app-loading></app-loading>
+	</ng-template>
+</ng-template>

@@ -1,16 +1,17 @@
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
+import { Review } from '../review/review.model';
 
 export class Show {
 	public title: string;
 	public description: string;
-	public averageRating: number;
 	public imageUrl: string;
 	public id: string;
+	public averageRating: number;
 	constructor(rawShow: IRawShow) {
 		this.title = rawShow.title;
 		this.description = rawShow.description;
-		this.averageRating = rawShow.average_rating;
 		this.imageUrl = rawShow.image_url;
+		this.averageRating = rawShow.average_rating;
 		this.id = rawShow.id;
 	}
 	public calcPercentageRating(): number {

@@ -1,3 +1,17 @@
-<ng-container *ngIf="show">
-	<app-show-details [show]="show"></app-show-details>
+<ng-container *ngIf="templateData$ | async as templateData; else loadingOrError">
+	<ng-container *ngIf="templateData.show">
+		<app-show-details [show]="templateData.show"></app-show-details>
+	</ng-container>
+	<ng-container *ngIf="templateData.reviews">
+		<app-review-list [reviews]="templateData.reviews"></app-review-list>
+	</ng-container>
 </ng-container>
+
+<ng-template #loadingOrError>
+	<ng-container *ngIf="errorObject; else loading">
+		<app-error></app-error>
+	</ng-container>
+	<ng-template #loading>
+		<app-loading></app-loading>
+	</ng-template>
+</ng-template>
