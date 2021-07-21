@@ -22,6 +22,6 @@
 
 		<button mat-raised-button (click)="onRegister()" [disabled]="registrationFormGroup.invalid">Register</button>
 
-		<p>Go to <a routerLink="">all shows</a></p>
+		<p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
 	</form>
 </mat-card>
