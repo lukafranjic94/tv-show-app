@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -14,7 +15,7 @@ import { LoginFormData } from './components/login-form/login-form.component';
 export class LoginContainerComponent implements OnInit {
 	public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router, private _snackBar: MatSnackBar) {}
 
 	ngOnInit(): void {}
 
@@ -27,9 +28,14 @@ export class LoginContainerComponent implements OnInit {
 					this.isLoading$.next(false);
 				})
 			)
-			.subscribe((loginFormData) => {
-				console.log(loginFormData);
-				this.router.navigate(['']);
-			});
+			.subscribe(
+				(loginFormData) => {
+					console.log(loginFormData);
+					this.router.navigate(['']);
+				},
+				(error) => {
+					this._snackBar.open('Invalid password', 'OK');
+				}
+			);
 	}
 }
