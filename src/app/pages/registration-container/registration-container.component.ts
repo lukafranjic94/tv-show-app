@@ -16,6 +16,7 @@ export class RegistrationContainerComponent implements OnInit {
 
 	public onRegister(registrationFormData: RegistrationFormData): void {
 		this.authService.onRegister(registrationFormData).subscribe((registrationFormData) => {
+			console.log(registrationFormData);
 			this.router.navigate(['']);
 		});
 	}
