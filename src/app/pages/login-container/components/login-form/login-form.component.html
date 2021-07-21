@@ -2,7 +2,7 @@
 	<form [formGroup]="loginFormGroup">
 		<mat-form-field appearance="fill">
 			<mat-label>Email</mat-label>
-			<input matInput formControlName="email" />
+			<input matInput type="email" formControlName="email" />
 			<mat-error *ngIf="loginFormGroup.get('email')?.errors?.required">Email is required!</mat-error>
 			<mat-error *ngIf="loginFormGroup.get('email')?.errors?.email">Please enter a valid email</mat-error>
 			<mat-icon matPrefix>person</mat-icon>
@@ -10,7 +10,7 @@
 
 		<mat-form-field appearance="fill">
 			<mat-label>Password</mat-label>
-			<input matInput formControlName="password" />
+			<input matInput type="password" formControlName="password" />
 			<mat-error *ngIf="loginFormGroup.get('password')?.errors?.required">Password is required!</mat-error>
 			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>

@@ -2,7 +2,7 @@
 	<form [formGroup]="registrationFormGroup">
 		<mat-form-field appearance="fill">
 			<mat-label>Email</mat-label>
-			<input matInput formControlName="email" />
+			<input matInput type="email" formControlName="email" />
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.required">Email is required!</mat-error>
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.email">Please enter a valid email</mat-error>
 			<mat-icon matPrefix>person</mat-icon>
@@ -10,7 +10,7 @@
 
 		<mat-form-field appearance="fill">
 			<mat-label>Password</mat-label>
-			<input matInput formControlName="password" />
+			<input matInput type="password" formControlName="password" />
 			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.required">Password is required!</mat-error>
 			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.minlength">Password should be at least 8
 				characters long!</mat-error>
@@ -19,7 +19,7 @@
 
 		<mat-form-field appearance="fill">
 			<mat-label>Password confirmation</mat-label>
-			<input matInput formControlName="passwordConfirmation" />
+			<input matInput type="password" formControlName="passwordConfirmation" />
 			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>
 
