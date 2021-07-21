@@ -5,6 +5,7 @@
 			<input matInput formControlName="email" />
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.required">Email is required!</mat-error>
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.email">Please enter a valid email</mat-error>
+			<mat-icon matPrefix>person</mat-icon>
 		</mat-form-field>
 
 		<mat-form-field appearance="fill">
@@ -13,11 +14,13 @@
 			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.required">Password is required!</mat-error>
 			<mat-error *ngIf="registrationFormGroup.get('password')?.errors?.minlength">Password should be at least 8
 				characters long!</mat-error>
+			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>
 
 		<mat-form-field appearance="fill">
 			<mat-label>Password confirmation</mat-label>
 			<input matInput formControlName="passwordConfirmation" />
+			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>
 
 		<button mat-raised-button (click)="onRegister()" [disabled]="registrationFormGroup.invalid">Register</button>
