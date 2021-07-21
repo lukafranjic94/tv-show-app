@@ -1,12 +1,33 @@
 import { EmitterVisitorContext } from '@angular/compiler';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	AbstractControl,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	FormGroupDirective,
+	NgForm,
+	Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { palindromeValidator } from 'src/app/validators/palindrome.validator';
+import { passwordConfirmationValidator } from 'src/app/validators/password-confirmation.validator';
 
 export interface RegistrationFormData {
 	email: string;
 	password: string;
 	passwordConfirmation: string;
+}
+
+class PasswordGroupStateMatcher implements ErrorStateMatcher {
+	constructor(private errors: Array<string>) {}
+	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+		return !!(
+			(control?.dirty || control?.touched) &&
+			form?.invalid &&
+			this.errors.some((error: string) => form.hasError(error))
+		);
+	}
 }
 
 @Component({
@@ -17,11 +38,15 @@ export interface RegistrationFormData {
 })
 export class RegistrationFormComponent implements OnInit {
 	@Output() register: EventEmitter<RegistrationFormData> = new EventEmitter();
-	public registrationFormGroup: FormGroup = this.fb.group({
-		email: ['', [Validators.required, Validators.email, palindromeValidator]],
-		password: ['', [Validators.required, Validators.minLength(8)]],
-		passwordConfirmation: ['', [Validators.required]],
-	});
+	public passwordGroupStateMatcher: PasswordGroupStateMatcher = new PasswordGroupStateMatcher(['passwordConfirmation']);
+	public registrationFormGroup: FormGroup = this.fb.group(
+		{
+			email: ['', [Validators.required, Validators.email, palindromeValidator]],
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			passwordConfirmation: [''],
+		},
+		{ validators: passwordConfirmationValidator }
+	);
 
 	constructor(private fb: FormBuilder) {}
 
@@ -29,5 +54,13 @@ export class RegistrationFormComponent implements OnInit {
 
 	public onRegister(): void {
 		this.register.emit(this.registrationFormGroup.value);
+	}
+
+	public get email(): AbstractControl | null {
+		return this.registrationFormGroup.get('email');
+	}
+
+	public get password(): AbstractControl | null {
+		return this.registrationFormGroup?.get('password');
 	}
 }
