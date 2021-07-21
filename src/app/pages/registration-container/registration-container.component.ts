@@ -26,7 +26,7 @@ export class RegistrationContainerComponent implements OnInit {
 					this.isLoading$.next(false);
 				})
 			)
-			.subscribe((registrationFormData) => {
+			.subscribe((registrationFormData: RegistrationFormData) => {
 				console.log(registrationFormData);
 				this.router.navigate(['']);
 			});

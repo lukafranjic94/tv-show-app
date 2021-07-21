@@ -29,12 +29,12 @@ export class LoginContainerComponent implements OnInit {
 				})
 			)
 			.subscribe(
-				(loginFormData) => {
+				(loginFormData: LoginFormData) => {
 					console.log(loginFormData);
 					this._snackBar.dismiss();
 					this.router.navigate(['']);
 				},
-				(error) => {
+				() => {
 					this._snackBar.open('Invalid password', 'OK');
 				}
 			);
