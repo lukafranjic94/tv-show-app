@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +29,8 @@ import { RegistrationContainerComponent } from './pages/registration-container/r
 import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginContainerComponent } from './pages/login-container/login-container.component';
+import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
 
 @NgModule({
 	declarations: [
@@ -48,6 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
 		FormLayoutComponent,
 		RegistrationContainerComponent,
 		RegistrationFormComponent,
+		LoginContainerComponent,
+		LoginFormComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -61,6 +66,7 @@ import { HttpClientModule } from '@angular/common/http';
 		MatInputModule,
 		ReactiveFormsModule,
 		HttpClientModule,
+		MatButtonModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
