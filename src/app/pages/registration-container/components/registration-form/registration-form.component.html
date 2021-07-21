@@ -5,6 +5,8 @@
 			<input matInput type="email" formControlName="email" />
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.required">Email is required!</mat-error>
 			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.email">Please enter a valid email</mat-error>
+			<mat-error *ngIf="registrationFormGroup.get('email')?.errors?.palindrome">Email username is a palindrome!
+			</mat-error>
 			<mat-icon matPrefix>person</mat-icon>
 		</mat-form-field>
 

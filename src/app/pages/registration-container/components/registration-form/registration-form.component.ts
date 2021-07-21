@@ -1,6 +1,7 @@
 import { EmitterVisitorContext } from '@angular/compiler';
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { palindromeValidator } from 'src/app/validators/palindrome.validator';
 
 export interface RegistrationFormData {
 	email: string;
@@ -17,7 +18,7 @@ export interface RegistrationFormData {
 export class RegistrationFormComponent implements OnInit {
 	@Output() register: EventEmitter<RegistrationFormData> = new EventEmitter();
 	public registrationFormGroup: FormGroup = this.fb.group({
-		email: ['', [Validators.required, Validators.email]],
+		email: ['', [Validators.required, Validators.email, palindromeValidator]],
 		password: ['', [Validators.required, Validators.minLength(8)]],
 		passwordConfirmation: ['', [Validators.required]],
 	});
