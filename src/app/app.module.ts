@@ -5,6 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -67,6 +68,7 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 		ReactiveFormsModule,
 		HttpClientModule,
 		MatButtonModule,
+		MatProgressBarModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
