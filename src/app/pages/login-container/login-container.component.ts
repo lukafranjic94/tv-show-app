@@ -31,6 +31,7 @@ export class LoginContainerComponent implements OnInit {
 			.subscribe(
 				(loginFormData) => {
 					console.log(loginFormData);
+					this._snackBar.dismiss();
 					this.router.navigate(['']);
 				},
 				(error) => {

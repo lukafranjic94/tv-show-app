@@ -29,6 +29,5 @@ export class RegistrationFormComponent implements OnInit {
 
 	public onRegister(): void {
 		this.register.emit(this.registrationFormGroup.value);
-		this.registrationFormGroup.reset();
 	}
 }

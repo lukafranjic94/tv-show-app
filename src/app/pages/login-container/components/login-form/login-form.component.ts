@@ -25,6 +25,5 @@ export class LoginFormComponent implements OnInit {
 
 	public onLogin(): void {
 		this.login.emit(this.loginFormGroup.value);
-		this.loginFormGroup.reset();
 	}
 }
