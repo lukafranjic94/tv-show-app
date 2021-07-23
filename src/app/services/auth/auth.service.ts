@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthData } from 'src/app/interfaces/auth-data.interface';
 import { LoginFormData } from 'src/app/pages/login-container/components/login-form/login-form.component';
@@ -12,7 +12,11 @@ import { StorageService } from '../storage/storage.service';
 })
 export class AuthService {
 	private readonly authDataKey = 'authData';
+	private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(Boolean(this.getAuthData()));
+	public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
+
 	constructor(private http: HttpClient, private storageService: StorageService) {}
+
 	public onRegister(registrationFormData: RegistrationFormData): Observable<RegistrationFormData> {
 		return this.http.post<RegistrationFormData>('https://tv-shows.infinum.academy/users', {
 			email: registrationFormData.email,
@@ -32,6 +36,7 @@ export class AuthService {
 
 					if (accessToken && uid && client) {
 						this.saveAuthData({ uid, accessToken, client });
+						this._isLoggedIn$.next(true);
 					}
 				})
 			);
