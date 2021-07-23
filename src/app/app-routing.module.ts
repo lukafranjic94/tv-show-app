@@ -4,6 +4,9 @@ import { AllShowsContainerComponent } from './pages/all-shows-container/all-show
 import { RouterModule, Routes } from '@angular/router';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
+import { FormLayoutComponent } from './components/form-layout/form-layout.component';
+import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
+import { LoginContainerComponent } from './pages/login-container/login-container.component';
 
 const routes: Routes = [
 	{
@@ -13,6 +16,14 @@ const routes: Routes = [
 			{ path: '', component: AllShowsContainerComponent },
 			{ path: 'top-rated', component: TopRatedContainerComponent },
 			{ path: 'show/:id', component: ShowDetailsContainerComponent },
+		],
+	},
+	{
+		path: '',
+		component: FormLayoutComponent,
+		children: [
+			{ path: 'register', component: RegistrationContainerComponent },
+			{ path: 'login', component: LoginContainerComponent },
 		],
 	},
 	{

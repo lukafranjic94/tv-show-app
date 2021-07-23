@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,32 +26,51 @@ import { ReviewListComponent } from './pages/show-details-container/components/r
 import { ReviewComponent } from './pages/show-details-container/components/review/review.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { FormLayoutComponent } from './components/form-layout/form-layout.component';
+import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
+import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginContainerComponent } from './pages/login-container/login-container.component';
+import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
 
 @NgModule({
 	declarations: [
-		AppComponent,
-		RatingComponent,
-		SidenavComponent,
-		ShowCardComponent,
-		ShowListComponent,
 		AllShowsContainerComponent,
+		AppComponent,
+		ErrorComponent,
+		FormLayoutComponent,
+		LoadingComponent,
+		LoginContainerComponent,
+		LoginFormComponent,
 		MainLayoutComponent,
-		TopRatedContainerComponent,
-		ShowDetailsContainerComponent,
-		ShowDetailsComponent,
-		ReviewListComponent,
+		RatingComponent,
+		RegistrationContainerComponent,
+		RegistrationFormComponent,
 		ReviewComponent,
-  ErrorComponent,
-  LoadingComponent,
+		ReviewListComponent,
+		ShowCardComponent,
+		ShowDetailsComponent,
+		ShowDetailsContainerComponent,
+		ShowListComponent,
+		SidenavComponent,
+		TopRatedContainerComponent,
 	],
 	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		MatCardModule,
-		MatSidenavModule,
-		MatIconModule,
 		AppRoutingModule,
+		BrowserAnimationsModule,
+		BrowserModule,
+		HttpClientModule,
+		MatButtonModule,
+		MatCardModule,
+		MatFormFieldModule,
+		MatIconModule,
+		MatInputModule,
+		MatProgressBarModule,
 		MatProgressSpinnerModule,
+		MatSidenavModule,
+		MatSnackBarModule,
+		ReactiveFormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
