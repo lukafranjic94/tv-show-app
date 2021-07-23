@@ -30,9 +30,10 @@ import { FormLayoutComponent } from './components/form-layout/form-layout.compon
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
 	declarations: [
@@ -72,7 +73,13 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 		MatSnackBarModule,
 		ReactiveFormsModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
