@@ -42,6 +42,11 @@ export class AuthService {
 			);
 	}
 
+	public onLogout(): void {
+		this.storageService.remove(this.authDataKey);
+		this._isLoggedIn$.next(false);
+	}
+
 	public saveAuthData(authData: AuthData): void {
 		this.storageService.add(this.authDataKey, authData);
 	}
