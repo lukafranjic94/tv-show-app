@@ -10,7 +10,11 @@ import { RegistrationFormData } from 'src/app/pages/registration-container/compo
 export class AuthService {
 	constructor(private http: HttpClient) {}
 	public onRegister(registrationFormData: RegistrationFormData): Observable<RegistrationFormData> {
-		return this.http.post<RegistrationFormData>('https://tv-shows.infinum.academy/users', registrationFormData);
+		return this.http.post<RegistrationFormData>('https://tv-shows.infinum.academy/users', {
+			email: registrationFormData.email,
+			password: registrationFormData.password,
+			password_confirmation: registrationFormData.passwordConfirmation,
+		});
 	}
 
 	public onLogin(loginFormData: LoginFormData): Observable<LoginFormData> {
