@@ -15,13 +15,14 @@ export interface ReviewFormData {
 export class ReviewFormComponent implements OnInit {
 	@Output() addReview: EventEmitter<ReviewFormData> = new EventEmitter<ReviewFormData>();
 	public reviewFormGroup = this.fb.group({
-		comment: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
-		rating: ['', [Validators.required]],
+		comment: ['', [Validators.required]],
+		rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
 	});
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit(): void {}
 	public onAddReview(): void {
+		console.log(this.reviewFormGroup.value);
 		this.addReview.emit(this.reviewFormGroup.value);
 		this.reviewFormGroup.reset();
 	}

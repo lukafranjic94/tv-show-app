@@ -1,8 +1,5 @@
 <form [formGroup]="reviewFormGroup">
-	<mat-form-field appearance="fill">
-		<mat-label>Rating</mat-label>
-		<input matInput type="number" formControlName="rating" />
-	</mat-form-field>
+	<ngb-rating formControlName="rating" [max]="5" [readonly]="false"></ngb-rating>
 
 	<mat-form-field appearance="fill">
 		<mat-label>Comment</mat-label>

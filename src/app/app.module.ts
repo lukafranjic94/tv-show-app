@@ -35,6 +35,7 @@ import { LoginContainerComponent } from './pages/login-container/login-container
 import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReviewFormComponent } from './pages/show-details-container/components/review-form/review-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -74,6 +75,7 @@ import { ReviewFormComponent } from './pages/show-details-container/components/r
 		MatSidenavModule,
 		MatSnackBarModule,
 		ReactiveFormsModule,
+  NgbModule,
 	],
 	providers: [
 		{
