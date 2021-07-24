@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 export interface ReviewFormData {
 	comment: string;
@@ -14,16 +14,16 @@ export interface ReviewFormData {
 })
 export class ReviewFormComponent implements OnInit {
 	@Output() addReview: EventEmitter<ReviewFormData> = new EventEmitter<ReviewFormData>();
-	public reviewFormGroup = this.fb.group({
+	public reviewFormGroup: FormGroup = this.fb.group({
 		comment: ['', [Validators.required]],
 		rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
 	});
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit(): void {}
-	public onAddReview(): void {
-		console.log(this.reviewFormGroup.value);
+	public onAddReview(formDirective: FormGroupDirective): void {
 		this.addReview.emit(this.reviewFormGroup.value);
+		formDirective.resetForm();
 		this.reviewFormGroup.reset();
 	}
 }
