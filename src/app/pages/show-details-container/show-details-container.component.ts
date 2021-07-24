@@ -1,9 +1,7 @@
-import { isNgTemplate } from '@angular/compiler';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, Subject } from 'rxjs';
 import { catchError, map, retry, switchMap } from 'rxjs/operators';
-import { IRawReview } from 'src/app/interfaces/rawReview.interface';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
@@ -28,12 +26,14 @@ export interface IReviewData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDetailsContainerComponent implements OnInit {
-	public templateData$: Observable<ITemplateData | undefined>;
+	public templateData$: Subject<ITemplateData | undefined> = new Subject<ITemplateData | undefined>();
+	private show$: Observable<Show | undefined>;
+	private reviews$: Observable<Array<Review> | undefined>;
 	public errorObject: Error;
 	constructor(private showService: ShowService, private route: ActivatedRoute, private reviewService: ReviewService) {}
 
 	ngOnInit(): void {
-		const show$: Observable<Show | undefined> = this.route.paramMap.pipe(
+		this.show$ = this.route.paramMap.pipe(
 			switchMap((paramMap: ParamMap) => {
 				const id: string | null = paramMap.get('id');
 				if (id) {
@@ -42,7 +42,7 @@ export class ShowDetailsContainerComponent implements OnInit {
 				return of(undefined);
 			})
 		);
-		const reviews$: Observable<Array<Review> | undefined> = this.route.paramMap.pipe(
+		this.reviews$ = this.route.paramMap.pipe(
 			switchMap((paramMap: ParamMap) => {
 				const id: string | null = paramMap.get('id');
 				if (id) {
@@ -51,7 +51,11 @@ export class ShowDetailsContainerComponent implements OnInit {
 				return of(undefined);
 			})
 		);
-		this.templateData$ = combineLatest([show$, reviews$]).pipe(
+		this.getTemplateDataObservable().subscribe(this.templateData$);
+	}
+
+	private getTemplateDataObservable(): Observable<ITemplateData | undefined> {
+		return combineLatest([this.show$, this.reviews$]).pipe(
 			map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
 				return {
 					show,
@@ -79,8 +83,13 @@ export class ShowDetailsContainerComponent implements OnInit {
 						});
 					}
 					return of(undefined);
+				}),
+				switchMap(() => {
+					return this.getTemplateDataObservable();
 				})
 			)
-			.subscribe((review: Review | undefined) => console.log(review));
+			.subscribe((templateData: ITemplateData | undefined) => {
+				this.templateData$.next(templateData);
+			});
 	}
 }
