@@ -1,0 +1,14 @@
+<form [formGroup]="reviewFormGroup">
+	<mat-form-field appearance="fill">
+		<mat-label>Rating</mat-label>
+		<input matInput type="number" formControlName="rating" />
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Comment</mat-label>
+		<input matInput formControlName="comment" />
+	</mat-form-field>
+
+	<button mat-raised-button (click)="onAddReview()" [disabled]="reviewFormGroup.invalid">Post</button>
+
+</form>

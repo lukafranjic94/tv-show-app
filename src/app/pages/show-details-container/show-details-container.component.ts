@@ -3,14 +3,22 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
 import { catchError, map, retry, switchMap } from 'rxjs/operators';
+import { IRawReview } from 'src/app/interfaces/rawReview.interface';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+import { ReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
 	show: Show | undefined;
 	reviews: Array<Review> | undefined;
+}
+
+export interface IReviewData {
+	comment: string;
+	rating: number;
+	showId: string;
 }
 
 @Component({
@@ -56,5 +64,23 @@ export class ShowDetailsContainerComponent implements OnInit {
 				return of(undefined);
 			})
 		);
+	}
+
+	public onAddReview(reviewFormData: ReviewFormData): void {
+		this.route.paramMap
+			.pipe(
+				switchMap((paramMap: ParamMap) => {
+					const showId: string | null = paramMap.get('id');
+					if (showId) {
+						return this.reviewService.addReview({
+							showId,
+							comment: reviewFormData.comment,
+							rating: reviewFormData.rating,
+						});
+					}
+					return of(undefined);
+				})
+			)
+			.subscribe((review: Review | undefined) => console.log(review));
 	}
 }

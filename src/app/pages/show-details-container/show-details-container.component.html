@@ -2,6 +2,7 @@
 	<ng-container *ngIf="templateData.show">
 		<app-show-details [show]="templateData.show"></app-show-details>
 	</ng-container>
+	<app-review-form (addReview)="onAddReview($event)"></app-review-form>
 	<ng-container *ngIf="templateData.reviews">
 		<app-review-list [reviews]="templateData.reviews"></app-review-list>
 	</ng-container>
