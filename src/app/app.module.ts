@@ -36,6 +36,7 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReviewFormComponent } from './pages/show-details-container/components/review-form/review-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 
 @NgModule({
 	declarations: [
@@ -51,6 +52,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		RegistrationContainerComponent,
 		RegistrationFormComponent,
 		ReviewComponent,
+		ReviewFormComponent,
 		ReviewListComponent,
 		ShowCardComponent,
 		ShowDetailsComponent,
@@ -58,7 +60,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		ShowListComponent,
 		SidenavComponent,
 		TopRatedContainerComponent,
-		ReviewFormComponent,
 	],
 	imports: [
 		AppRoutingModule,
@@ -74,13 +75,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		MatProgressSpinnerModule,
 		MatSidenavModule,
 		MatSnackBarModule,
+		NgbModule,
 		ReactiveFormsModule,
-  NgbModule,
 	],
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthErrorInterceptor,
 			multi: true,
 		},
 	],
