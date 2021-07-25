@@ -17,13 +17,13 @@ export class ShowService {
 	public getShows(): Observable<Array<Show>> {
 		return this.http
 			.get<{ shows: Array<IRawShow> }>(`${this.baseUrl}${ApiPaths.Shows}`)
-			.pipe(map((response) => response.shows.map((rawShow) => new Show(rawShow))));
+			.pipe(map((response) => response.shows.map((rawShow: IRawShow) => new Show(rawShow))));
 	}
 
 	public getTopRated(): Observable<Array<Show>> {
 		return this.http
 			.get<{ shows: Array<IRawShow> }>(`${this.baseUrl}${ApiPaths.Shows}/top_rated`)
-			.pipe(map((response) => response.shows.map((rawShow) => new Show(rawShow))));
+			.pipe(map((response) => response.shows.map((rawShow: IRawShow) => new Show(rawShow))));
 	}
 
 	public getShow(id: string): Observable<Show | undefined> {

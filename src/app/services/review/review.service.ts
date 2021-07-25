@@ -15,7 +15,7 @@ export class ReviewService {
 	public getReviewsForShowId(showId: string): Observable<Array<Review>> {
 		return this.http
 			.get<{ reviews: Array<IRawReview> }>(`${this.baseUrl}${ApiPaths.Shows}/${showId}${ApiPaths.Reviews}`)
-			.pipe(map((response) => response.reviews.map((rawReview) => new Review(rawReview))));
+			.pipe(map((response) => response.reviews.map((rawReview: IRawReview) => new Review(rawReview))));
 	}
 
 	public addReview(reviewData: IReviewData): Observable<Review> {

@@ -14,7 +14,7 @@ export class AppGuard implements CanActivate {
 		state: RouterStateSnapshot
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		return this.authService.isLoggedIn$.pipe(
-			map((isLoggedIn) => {
+			map((isLoggedIn: boolean) => {
 				if (isLoggedIn) {
 					return isLoggedIn;
 				}
