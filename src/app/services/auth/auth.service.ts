@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { AuthData } from 'src/app/interfaces/auth-data.interface';
 import { LoginFormData } from 'src/app/pages/login-container/components/login-form/login-form.component';
 import { RegistrationFormData } from 'src/app/pages/registration-container/components/registration-form/registration-form.component';
+import { ApiPaths, environment } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({
@@ -14,11 +15,12 @@ export class AuthService {
 	private readonly authDataKey = 'authData';
 	private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(Boolean(this.getAuthData()));
 	public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
+	private baseUrl: string = environment.baseUrl;
 
 	constructor(private http: HttpClient, private storageService: StorageService) {}
 
 	public onRegister(registrationFormData: RegistrationFormData): Observable<RegistrationFormData> {
-		return this.http.post<RegistrationFormData>('https://tv-shows.infinum.academy/users', {
+		return this.http.post<RegistrationFormData>(`${this.baseUrl}${ApiPaths.Auth}`, {
 			email: registrationFormData.email,
 			password: registrationFormData.password,
 			password_confirmation: registrationFormData.passwordConfirmation,
@@ -27,7 +29,7 @@ export class AuthService {
 
 	public onLogin(loginFormData: LoginFormData): Observable<any> {
 		return this.http
-			.post<HttpResponse<any>>('https://tv-shows.infinum.academy/users/sign_in', loginFormData, { observe: 'response' })
+			.post<HttpResponse<any>>(`${this.baseUrl}${ApiPaths.Auth}/sign_in`, loginFormData, { observe: 'response' })
 			.pipe(
 				tap((response: HttpResponse<any>) => {
 					const accessToken: string | null = response.headers.get('access-token');

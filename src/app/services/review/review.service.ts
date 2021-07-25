@@ -5,21 +5,23 @@ import { delay, map } from 'rxjs/operators';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
 import { ReviewFormData } from 'src/app/pages/show-details-container/components/review-form/review-form.component';
 import { IReviewData } from 'src/app/pages/show-details-container/show-details-container.component';
+import { ApiPaths, environment } from 'src/environments/environment';
 import { Review } from './review.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ReviewService {
+	private baseUrl: string = environment.baseUrl;
 	public getReviewsForShowId(showId: string): Observable<Array<Review>> {
 		return this.http
-			.get<{ reviews: Array<IRawReview> }>(`https://tv-shows.infinum.academy/shows/${showId}/reviews`)
+			.get<{ reviews: Array<IRawReview> }>(`${this.baseUrl}${ApiPaths.Shows}/${showId}${ApiPaths.Reviews}`)
 			.pipe(map((response) => response.reviews.map((rawReview) => new Review(rawReview))));
 	}
 
 	public addReview(reviewData: IReviewData): Observable<Review> {
 		return this.http
-			.post<{ review: IRawReview }>('https://tv-shows.infinum.academy/reviews', {
+			.post<{ review: IRawReview }>(`${this.baseUrl}${ApiPaths.Reviews}`, {
 				comment: reviewData.comment,
 				rating: reviewData.rating,
 				show_id: reviewData.showId,
