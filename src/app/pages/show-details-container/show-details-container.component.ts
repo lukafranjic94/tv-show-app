@@ -6,7 +6,7 @@ import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
-import { ReviewFormData } from './components/review-form/review-form.component';
+import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
 	show: Show | undefined;
@@ -70,7 +70,7 @@ export class ShowDetailsContainerComponent implements OnInit {
 		);
 	}
 
-	public onAddReview(reviewFormData: ReviewFormData): void {
+	public onAddReview(reviewFormData: IReviewFormData): void {
 		this.route.paramMap
 			.pipe(
 				switchMap((paramMap: ParamMap) => {

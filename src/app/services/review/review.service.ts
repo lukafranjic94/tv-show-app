@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
-import { ReviewFormData } from 'src/app/pages/show-details-container/components/review-form/review-form.component';
 import { IReviewData } from 'src/app/pages/show-details-container/show-details-container.component';
 import { ApiPaths, environment } from 'src/environments/environment';
 import { Review } from './review.model';

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
-export interface ReviewFormData {
+export interface IReviewFormData {
 	comment: string;
 	rating: number;
 }
@@ -13,7 +13,7 @@ export interface ReviewFormData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewFormComponent implements OnInit {
-	@Output() addReview: EventEmitter<ReviewFormData> = new EventEmitter<ReviewFormData>();
+	@Output() addReview: EventEmitter<IReviewFormData> = new EventEmitter<IReviewFormData>();
 	public reviewFormGroup: FormGroup = this.fb.group({
 		comment: ['', [Validators.required]],
 		rating: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
