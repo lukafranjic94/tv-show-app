@@ -1,6 +1,7 @@
-<mat-card>
+<mat-card class="register">
+	<app-logo class="logo"></app-logo>
 	<form [formGroup]="registrationFormGroup">
-		<mat-form-field appearance="fill">
+		<mat-form-field class="form-field" appearance="outline">
 			<mat-label>Email</mat-label>
 			<input matInput type="email" formControlName="email" />
 			<mat-error *ngIf="email?.errors?.required">Email is required!</mat-error>
@@ -10,7 +11,7 @@
 			<mat-icon matPrefix>person</mat-icon>
 		</mat-form-field>
 
-		<mat-form-field appearance="fill">
+		<mat-form-field class="form-field" appearance="outline">
 			<mat-label>Password</mat-label>
 			<input matInput type="password" formControlName="password" />
 			<mat-error *ngIf="password?.errors?.required">Password is required!</mat-error>
@@ -19,7 +20,7 @@
 			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>
 
-		<mat-form-field appearance="fill">
+		<mat-form-field class="form-field" appearance="outline">
 			<mat-label>Password confirmation</mat-label>
 			<input matInput type="password" formControlName="passwordConfirmation"
 				[errorStateMatcher]="passwordGroupStateMatcher" />
@@ -27,7 +28,8 @@
 			<mat-icon matPrefix>lock</mat-icon>
 		</mat-form-field>
 
-		<button mat-raised-button (click)="onRegister()" [disabled]="registrationFormGroup.invalid">Register</button>
+		<button class="register-btn" mat-raised-button color="primary" (click)="onRegister()"
+			[disabled]="registrationFormGroup.invalid">Register</button>
 
 		<p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
 	</form>
