@@ -1,9 +1,7 @@
 <mat-card (click)="logTitle()" class="show-card">
-	<mat-card-header>
-		<mat-card-title>{{ title }}</mat-card-title>
-	</mat-card-header>
-	<img mat-card-image [src]="imageUrl">
-	<mat-card-content>
+	<img class="image" [src]="imageUrl">
+	<mat-card-content class="info">
+		<h3 class="title">{{ title }}</h3>
 		<app-rating [rating]="averageRating"></app-rating>
 	</mat-card-content>
 </mat-card>
