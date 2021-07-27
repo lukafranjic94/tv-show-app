@@ -1,0 +1,17 @@
+<form [formGroup]="reviewFormGroup" #formDirective="ngForm" (ngSubmit)="onAddReview(formDirective)">
+	<p>Rating</p>
+	<ngb-rating formControlName="rating" [max]="5" [readonly]="false">
+		<ng-template let-fill="fill">
+			<span class="star" [class.filled]="fill === 100">&#9733;</span>
+		</ng-template>
+	</ngb-rating>
+
+	<mat-form-field appearance="fill">
+		<mat-label>Comment</mat-label>
+		<textarea matInput formControlName="comment"></textarea>
+		<mat-error>Please enter a comment!</mat-error>
+	</mat-form-field>
+
+	<button mat-raised-button type="submit" [disabled]="reviewFormGroup.invalid">Post</button>
+
+</form>

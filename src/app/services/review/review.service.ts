@@ -1,62 +1,32 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IRawReview } from 'src/app/interfaces/rawReview.interface';
+import { IReviewData } from 'src/app/pages/show-details-container/show-details-container.component';
+import { ApiPaths, environment } from 'src/environments/environment';
 import { Review } from './review.model';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ReviewService {
-	private rawReviews: Array<IRawReview> = [
-		{
-			comment: 'Not bad at all',
-			rating: 4.1,
-			id: '1',
-			show_id: '2',
-		},
-		{
-			comment: 'What even is this show??',
-			rating: 1.5,
-			id: '2',
-			show_id: '3',
-		},
-		{
-			comment: 'Pretty good',
-			rating: 4.8,
-			id: '3',
-			show_id: '2',
-		},
-		{
-			comment: 'Simply amazing',
-			rating: 5,
-			id: '4',
-			show_id: '2',
-		},
-	];
-
-	private get reviews(): Array<Review> {
-		return this.rawReviews.map((rawReview: IRawReview) => new Review(rawReview));
-	}
-
-	public getReviews(): Observable<Array<Review>> {
-		return of(this.reviews).pipe(
-			delay(1000 + Math.random() * 1000),
-			map((reviews: Array<Review>) => {
-				let rndNum: number = Math.random();
-				if (rndNum >= 0.9) {
-					throw new Error('error message');
-				}
-				return reviews;
-			})
-		);
-	}
-
+	private baseUrl: string = environment.baseUrl;
 	public getReviewsForShowId(showId: string): Observable<Array<Review>> {
-		return this.getReviews().pipe(
-			map((reviews: Array<Review>) => reviews.filter((review: Review) => review.showId === showId))
-		);
+		return this.http
+			.get<{ reviews: Array<IRawReview> }>(`${this.baseUrl}${ApiPaths.Shows}/${showId}${ApiPaths.Reviews}`)
+			.pipe(map((response) => response.reviews.map((rawReview: IRawReview) => new Review(rawReview))));
 	}
 
-	constructor() {}
+	public addReview(reviewData: IReviewData): Observable<Review> {
+		return this.http
+			.post<{ review: IRawReview }>(`${this.baseUrl}${ApiPaths.Reviews}`, {
+				comment: reviewData.comment,
+				rating: reviewData.rating,
+				show_id: reviewData.showId,
+			})
+			.pipe(map((response) => new Review(response.review)));
+	}
+
+	constructor(private http: HttpClient) {}
 }

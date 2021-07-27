@@ -1,16 +1,22 @@
-import { isNgTemplate } from '@angular/compiler';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { combineLatest, Observable, of } from 'rxjs';
-import { catchError, map, retry, switchMap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { combineLatest, merge, Observable, of, Subject, throwError } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
 	show: Show | undefined;
 	reviews: Array<Review> | undefined;
+}
+
+export interface IReviewData {
+	comment: string;
+	rating: number;
+	showId: string;
 }
 
 @Component({
@@ -19,42 +25,42 @@ interface ITemplateData {
 	styleUrls: ['./show-details-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShowDetailsContainerComponent implements OnInit {
-	public templateData$: Observable<ITemplateData | undefined>;
+export class ShowDetailsContainerComponent {
+	private fetchTrigger$: Subject<void> = new Subject();
+	public templateData$: Observable<ITemplateData | undefined> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
+		switchMap(() => {
+			const id: string | null = this.route.snapshot.paramMap.get('id');
+			if (id) {
+				return combineLatest([this.showService.getShow(id), this.reviewService.getReviewsForShowId(id)]);
+			}
+			return throwError('Something went wrong');
+		}),
+		map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
+			return {
+				show,
+				reviews,
+			};
+		}),
+		catchError((error: Error) => {
+			this.errorObject = error;
+			return of(undefined);
+		})
+	);
 	public errorObject: Error;
 	constructor(private showService: ShowService, private route: ActivatedRoute, private reviewService: ReviewService) {}
 
-	ngOnInit(): void {
-		const show$: Observable<Show | undefined> = this.route.paramMap.pipe(
-			switchMap((paramMap: ParamMap) => {
-				const id: string | null = paramMap.get('id');
-				if (id) {
-					return this.showService.getShow(id);
-				}
-				return of(undefined);
-			})
-		);
-		const reviews$: Observable<Array<Review> | undefined> = this.route.paramMap.pipe(
-			switchMap((paramMap: ParamMap) => {
-				const id: string | null = paramMap.get('id');
-				if (id) {
-					return this.reviewService.getReviewsForShowId(id);
-				}
-				return of(undefined);
-			})
-		);
-		this.templateData$ = combineLatest([show$, reviews$]).pipe(
-			map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
-				return {
-					show,
-					reviews,
-				};
-			}),
-			retry(1),
-			catchError((error: Error) => {
-				this.errorObject = error;
-				return of(undefined);
-			})
-		);
+	public onAddReview(reviewFormData: IReviewFormData): void {
+		const showId: string | null = this.route.snapshot.paramMap.get('id');
+		if (showId) {
+			this.reviewService
+				.addReview({
+					comment: reviewFormData.comment,
+					rating: reviewFormData.rating,
+					showId,
+				})
+				.subscribe(() => {
+					this.fetchTrigger$.next();
+				});
+		}
 	}
 }

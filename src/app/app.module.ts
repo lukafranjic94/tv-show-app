@@ -30,9 +30,13 @@ import { FormLayoutComponent } from './components/form-layout/form-layout.compon
 import { RegistrationContainerComponent } from './pages/registration-container/registration-container.component';
 import { RegistrationFormComponent } from './pages/registration-container/components/registration-form/registration-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginContainerComponent } from './pages/login-container/login-container.component';
 import { LoginFormComponent } from './pages/login-container/components/login-form/login-form.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ReviewFormComponent } from './pages/show-details-container/components/review-form/review-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 
 @NgModule({
 	declarations: [
@@ -48,6 +52,7 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 		RegistrationContainerComponent,
 		RegistrationFormComponent,
 		ReviewComponent,
+		ReviewFormComponent,
 		ReviewListComponent,
 		ShowCardComponent,
 		ShowDetailsComponent,
@@ -70,9 +75,21 @@ import { LoginFormComponent } from './pages/login-container/components/login-for
 		MatProgressSpinnerModule,
 		MatSidenavModule,
 		MatSnackBarModule,
+		NgbModule,
 		ReactiveFormsModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthErrorInterceptor,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
