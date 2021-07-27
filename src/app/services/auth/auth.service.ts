@@ -30,35 +30,24 @@ export class AuthService {
 				},
 				{ observe: 'response' }
 			)
-			.pipe(
-				tap((response: HttpResponse<any>) => {
-					const accessToken: string | null = response.headers.get('access-token');
-					const uid: string | null = response.headers.get('uid');
-					const client: string | null = response.headers.get('client');
-
-					if (accessToken && uid && client) {
-						this.saveAuthData({ uid, accessToken, client });
-						this._isLoggedIn$.next(true);
-					}
-				})
-			);
+			.pipe(tap(this.handleResponse.bind(this)));
 	}
 
 	public onLogin(loginFormData: LoginFormData): Observable<any> {
 		return this.http
 			.post<HttpResponse<any>>(`${this.baseUrl}${ApiPaths.Auth}/sign_in`, loginFormData, { observe: 'response' })
-			.pipe(
-				tap((response: HttpResponse<any>) => {
-					const accessToken: string | null = response.headers.get('access-token');
-					const uid: string | null = response.headers.get('uid');
-					const client: string | null = response.headers.get('client');
+			.pipe(tap(this.handleResponse.bind(this)));
+	}
 
-					if (accessToken && uid && client) {
-						this.saveAuthData({ uid, accessToken, client });
-						this._isLoggedIn$.next(true);
-					}
-				})
-			);
+	private handleResponse(response: HttpResponse<any>): void {
+		const accessToken: string | null = response.headers.get('access-token');
+		const uid: string | null = response.headers.get('uid');
+		const client: string | null = response.headers.get('client');
+
+		if (accessToken && uid && client) {
+			this.saveAuthData({ uid, accessToken, client });
+			this._isLoggedIn$.next(true);
+		}
 	}
 
 	public onLogout(): void {
