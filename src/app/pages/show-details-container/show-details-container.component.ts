@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, merge, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
@@ -26,6 +27,7 @@ export interface IReviewData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDetailsContainerComponent {
+	public userEmail: string | undefined = this.authService.getAuthData()?.uid;
 	private fetchTrigger$: Subject<void> = new Subject();
 	public templateData$: Observable<ITemplateData | undefined> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
 		switchMap(() => {
@@ -47,7 +49,12 @@ export class ShowDetailsContainerComponent {
 		})
 	);
 	public errorObject: Error;
-	constructor(private showService: ShowService, private route: ActivatedRoute, private reviewService: ReviewService) {}
+	constructor(
+		private showService: ShowService,
+		private route: ActivatedRoute,
+		private reviewService: ReviewService,
+		private authService: AuthService
+	) {}
 
 	public onAddReview(reviewFormData: IReviewFormData): void {
 		const showId: string | null = this.route.snapshot.paramMap.get('id');
@@ -62,5 +69,11 @@ export class ShowDetailsContainerComponent {
 					this.fetchTrigger$.next();
 				});
 		}
+	}
+
+	public onDeleteReview(reviewId: string): void {
+		this.reviewService.deleteReview(reviewId).subscribe(() => {
+			this.fetchTrigger$.next();
+		});
 	}
 }

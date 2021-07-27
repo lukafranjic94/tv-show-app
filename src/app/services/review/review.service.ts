@@ -28,5 +28,9 @@ export class ReviewService {
 			.pipe(map((response) => new Review(response.review)));
 	}
 
+	public deleteReview(reviewId: string): Observable<any> {
+		return this.http.delete(`${this.baseUrl}${ApiPaths.Reviews}/${reviewId}`);
+	}
+
 	constructor(private http: HttpClient) {}
 }

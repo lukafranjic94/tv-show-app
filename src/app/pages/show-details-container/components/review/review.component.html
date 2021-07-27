@@ -1,5 +1,8 @@
 <div class="review">
 	<p>{{ userEmail }}</p>
+	<ng-container *ngIf="userEmail === currentUserEmail">
+		<button (click)="onDeleteReview()">Delete</button>
+	</ng-container>
 	<p>{{ comment }}</p>
 	<p>
 		<app-rating [rating]="rating"></app-rating>
