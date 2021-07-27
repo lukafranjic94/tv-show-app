@@ -38,6 +38,8 @@ import { ReviewFormComponent } from './pages/show-details-container/components/r
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 import { LogoComponent } from './components/logo/logo.component';
+import { UserProfileContainerComponent } from './pages/user-profile-container/user-profile-container.component';
+import { UserProfileComponent } from './pages/user-profile-container/components/user-profile/user-profile.component';
 
 @NgModule({
 	declarations: [
@@ -62,6 +64,8 @@ import { LogoComponent } from './components/logo/logo.component';
 		SidenavComponent,
 		TopRatedContainerComponent,
   LogoComponent,
+  UserProfileContainerComponent,
+  UserProfileComponent,
 	],
 	imports: [
 		AppRoutingModule,

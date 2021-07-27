@@ -19,6 +19,10 @@ export class SidenavComponent implements OnInit {
 			title: 'Top rated',
 			url: '/top-rated',
 		},
+		{
+			title: 'My profile',
+			url: '/profile',
+		},
 	];
 
 	constructor(private authService: AuthService, private router: Router) {}
