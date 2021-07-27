@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest, merge, Observable, of, Subject } from 'rxjs';
+import { combineLatest, merge, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
@@ -33,7 +33,7 @@ export class ShowDetailsContainerComponent {
 			if (id) {
 				return combineLatest([this.showService.getShow(id), this.reviewService.getReviewsForShowId(id)]);
 			}
-			throw new Error('Something went wrong');
+			return throwError('Something went wrong');
 		}),
 		map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
 			return {
