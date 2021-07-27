@@ -19,12 +19,29 @@ export class AuthService {
 
 	constructor(private http: HttpClient, private storageService: StorageService) {}
 
-	public onRegister(registrationFormData: RegistrationFormData): Observable<RegistrationFormData> {
-		return this.http.post<RegistrationFormData>(`${this.baseUrl}${ApiPaths.Auth}`, {
-			email: registrationFormData.email,
-			password: registrationFormData.password,
-			password_confirmation: registrationFormData.passwordConfirmation,
-		});
+	public onRegister(registrationFormData: RegistrationFormData): Observable<any> {
+		return this.http
+			.post<HttpResponse<any>>(
+				`${this.baseUrl}${ApiPaths.Auth}`,
+				{
+					email: registrationFormData.email,
+					password: registrationFormData.password,
+					password_confirmation: registrationFormData.passwordConfirmation,
+				},
+				{ observe: 'response' }
+			)
+			.pipe(
+				tap((response: HttpResponse<any>) => {
+					const accessToken: string | null = response.headers.get('access-token');
+					const uid: string | null = response.headers.get('uid');
+					const client: string | null = response.headers.get('client');
+
+					if (accessToken && uid && client) {
+						this.saveAuthData({ uid, accessToken, client });
+						this._isLoggedIn$.next(true);
+					}
+				})
+			);
 	}
 
 	public onLogin(loginFormData: LoginFormData): Observable<any> {
