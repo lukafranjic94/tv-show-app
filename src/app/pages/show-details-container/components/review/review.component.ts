@@ -9,6 +9,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class ReviewComponent implements OnInit {
 	@Input() comment: string;
 	@Input() rating: number;
+	@Input() userEmail: string;
+	@Input() userImageUrl: string;
 
 	constructor() {}
 
