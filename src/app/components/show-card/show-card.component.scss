@@ -1,3 +1,5 @@
+@use 'utils/colors';
+
 :host {
 	display: block;
 	height: 100%;
@@ -17,6 +19,7 @@
 
 	border-radius: 24px;
 	overflow: hidden;
+	background-color: colors.$white;
 }
 
 .image {
@@ -27,6 +30,7 @@
 .info {
 	flex: 1;
 
+	color: colors.$purple;
 	padding: 16px 16px 12px;
 
 	display: flex;

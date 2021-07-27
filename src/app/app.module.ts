@@ -37,6 +37,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ReviewFormComponent } from './pages/show-details-container/components/review-form/review-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
 	declarations: [
@@ -60,6 +61,7 @@ import { AuthErrorInterceptor } from './interceptors/auth-error.interceptor';
 		ShowListComponent,
 		SidenavComponent,
 		TopRatedContainerComponent,
+  LogoComponent,
 	],
 	imports: [
 		AppRoutingModule,
