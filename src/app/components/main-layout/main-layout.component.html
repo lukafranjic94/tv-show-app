@@ -6,7 +6,7 @@
 
 				<app-logo *ngIf="!layout.isSmall" class="logo"></app-logo>
 
-				<button *ngIf="layout.isSmall" mat-icon-button (click)="drawer.close()">
+				<button *ngIf="layout.isSmall" class="close-btn" mat-icon-button (click)="drawer.close()">
 					<mat-icon>close</mat-icon>
 				</button>
 				<app-sidenav class="sidenav"></app-sidenav>
