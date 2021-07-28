@@ -1,10 +1,20 @@
 <div class="review">
-	<p>{{ userEmail }}</p>
+	<div class="info">
+		<div class="image-container">
+			<img class="image" [src]="userImageUrl" alt="">
+		</div>
+		<div class="user-rating">
+			<p>{{ userEmail }}</p>
+			<p>
+				{{ rating }}/5
+				<ngb-rating [(rate)]="rating" [readonly]="true" [max]="5"></ngb-rating>
+			</p>
+		</div>
+	</div>
+	<div class="content">
+		<p>{{ comment }}</p>
+	</div>
 	<ng-container *ngIf="userEmail === currentUserEmail">
 		<button (click)="onDeleteReview()">Delete</button>
 	</ng-container>
-	<p>{{ comment }}</p>
-	<p>
-		<app-rating [rating]="rating"></app-rating>
-	</p>
 </div>
