@@ -1,15 +1,31 @@
+@use 'utils/colors';
+
 form {
 	display: flex;
 	flex-direction: column;
-	max-width: 400px;
 	margin-bottom: 25px;
 }
 
 .star {
 	font-size: 25pt;
-	color: #b0c4de;
+	color: colors.$purple;
 }
 
 .filled {
-	color: #1e90ff;
+	color: colors.$white;
+}
+
+.comment-textarea {
+	background-color: colors.$white;
+	color: colors.$purple;
+	border-radius: 24px;
+	padding: 25px;
+}
+
+.rating {
+	padding-left: 30px;
+	margin-top: 25px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
 }
