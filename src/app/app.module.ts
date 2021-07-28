@@ -38,6 +38,7 @@ import { ShowDetailsComponent } from './pages/show-details-container/components/
 import { ShowDetailsContainerComponent } from './pages/show-details-container/show-details-container.component';
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
 import { UserProfileContainerComponent } from './pages/user-profile-container/user-profile-container.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
 	declarations: [
@@ -48,6 +49,7 @@ import { UserProfileContainerComponent } from './pages/user-profile-container/us
 		LoadingComponent,
 		LoginContainerComponent,
 		LoginFormComponent,
+		LogoComponent,
 		MainLayoutComponent,
 		RatingComponent,
 		RegistrationContainerComponent,
@@ -61,7 +63,6 @@ import { UserProfileContainerComponent } from './pages/user-profile-container/us
 		ShowListComponent,
 		SidenavComponent,
 		TopRatedContainerComponent,
-		LogoComponent,
 		UserProfileContainerComponent,
 	],
 	imports: [
@@ -74,6 +75,7 @@ import { UserProfileContainerComponent } from './pages/user-profile-container/us
 		MatFormFieldModule,
 		MatIconModule,
 		MatInputModule,
+		MatMenuModule,
 		MatProgressBarModule,
 		MatProgressSpinnerModule,
 		MatSidenavModule,
