@@ -1,3 +1,12 @@
 <ng-container *ngIf="email">
-	<app-user-profile [email]="email"></app-user-profile>
+	<div class="profile">
+		<div class="user-info">
+			<h4>EMAIL</h4>
+			<p>{{ email }}</p>
+		</div>
+		<div class="image-dropzone">
+			<img class="image" src="assets/images/profile_placeholder_logo.svg" alt="">
+			<p class="dropzone-text">Drop your photo here</p>
+		</div>
+	</div>
 </ng-container>
