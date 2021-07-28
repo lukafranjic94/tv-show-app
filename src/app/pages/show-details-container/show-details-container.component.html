@@ -2,11 +2,17 @@
 	<ng-container *ngIf="templateData.show">
 		<app-show-details [show]="templateData.show"></app-show-details>
 	</ng-container>
-	<app-review-form (addReview)="onAddReview($event)"></app-review-form>
-	<ng-container *ngIf="templateData.reviews && userEmail">
-		<app-review-list [reviews]="templateData.reviews" [userEmail]="userEmail" (deleteReview)="onDeleteReview($event)">
-		</app-review-list>
-	</ng-container>
+	<div class="review-section">
+		<h2 class="title">Reviews</h2>
+		<div class="reviews">
+			<app-review-form (addReview)="onAddReview($event)"></app-review-form>
+			<ng-container *ngIf="templateData.reviews && userEmail">
+				<app-review-list [reviews]="templateData.reviews" [userEmail]="userEmail"
+					(deleteReview)="onDeleteReview($event)">
+				</app-review-list>
+			</ng-container>
+		</div>
+	</div>
 </ng-container>
 
 <ng-template #loadingOrError>
