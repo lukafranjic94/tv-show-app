@@ -20,6 +20,8 @@
 
 .info {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	margin-top: 20px;
 	padding: 35px;
 	color: colors.$purple;
@@ -28,10 +30,4 @@
 .title {
 	display: flex;
 	flex-direction: column;
-	padding-right: 25px;
-	flex: 1;
-}
-
-.description {
-	flex: 2;
 }
