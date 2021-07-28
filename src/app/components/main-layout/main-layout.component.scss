@@ -1,0 +1,37 @@
+.main-layout-drawer {
+	height: 100%;
+}
+
+.side-drawer {
+	min-width: 264px;
+	padding: 32px 32px 56px;
+
+	.logo {
+		margin-bottom: 80px;
+	}
+
+	.side-nav {
+		flex: 1;
+	}
+}
+
+.content {
+	padding: 32px;
+}
+
+.header {
+	margin-bottom: 32px;
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.haba {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.log-out-btn {
+		margin-top: auto;
+	}
+}
