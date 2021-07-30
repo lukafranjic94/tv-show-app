@@ -6,7 +6,28 @@
 	margin-bottom: 25px;
 	overflow: hidden;
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	padding: 40px;
+}
+
+@media screen and (max-width: 960px) {
+	.content {
+		margin-top: 25px;
+	}
+	.review {
+		flex-direction: column;
+	}
+	.menu-btn {
+		align-self: flex-end;
+		order: 2;
+	}
+	.info {
+		order: 1;
+	}
+	.content {
+		order: 3;
+	}
 }
 
 .info {
@@ -17,6 +38,7 @@
 	p {
 		margin: 0;
 	}
+	width: 100%;
 }
 
 .content {
@@ -31,4 +53,15 @@
 
 .image-container {
 	margin-right: 10px;
+}
+
+.user-rating {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100%;
+	p {
+		width: 100%;
+		word-wrap: break-word;
+	}
 }
