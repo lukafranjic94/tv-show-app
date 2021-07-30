@@ -1,0 +1,14 @@
+.review-section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.title {
+	flex: 1;
+}
+
+.reviews {
+	flex: 5;
+	width: 100%;
+}

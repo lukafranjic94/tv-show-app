@@ -1,0 +1,28 @@
+@use 'utils/colors';
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.profile {
+	margin: auto;
+	text-align: center;
+}
+
+.image-dropzone {
+	padding: 130px;
+	border-radius: 24px;
+	border: 1px dashed colors.$purple;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.dropzone-text {
+	margin-top: 25px;
+	font-size: 20pt;
+	color: colors.$light-purple;
+}

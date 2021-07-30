@@ -1,6 +1,28 @@
 <div class="review">
-	<p>{{ comment }}</p>
-	<p>
-		<app-rating [rating]="rating"></app-rating>
-	</p>
+	<div class="info">
+		<div class="image-container">
+			<img class="image" [src]="userImageUrl" onerror="this.src='assets/images/placeholder_avatar.jpg'" alt="">
+		</div>
+		<div class="user-rating">
+			<p>{{ userEmail }}</p>
+			<p>
+				{{ rating }}/5
+				<ngb-rating [(rate)]="rating" [readonly]="true" [max]="5"></ngb-rating>
+			</p>
+		</div>
+	</div>
+	<div class="content">
+		<p>{{ comment }}</p>
+	</div>
+	<ng-container *ngIf="userEmail === currentUserEmail">
+		<button class="menu-btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+			<mat-icon>more_vert</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button (click)="onDeleteReview()" mat-menu-item>
+				<span>Delete</span>
+			</button>
+		</mat-menu>
+
+	</ng-container>
 </div>

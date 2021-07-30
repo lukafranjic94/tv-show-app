@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 	styleUrls: ['./sidenav.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
 	public links: Array<ILink> = [
 		{
 			title: 'All shows',
@@ -19,14 +19,11 @@ export class SidenavComponent implements OnInit {
 			title: 'Top rated',
 			url: '/top-rated',
 		},
+		{
+			title: 'My profile',
+			url: '/profile',
+		},
 	];
 
-	constructor(private authService: AuthService, private router: Router) {}
-
-	ngOnInit(): void {}
-
-	public logOut(): void {
-		this.authService.onLogout();
-		this.router.navigate(['/login']);
-	}
+	constructor() {}
 }
