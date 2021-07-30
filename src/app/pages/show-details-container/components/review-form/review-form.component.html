@@ -1,6 +1,6 @@
 <form [formGroup]="reviewFormGroup" #formDirective="ngForm" (ngSubmit)="onAddReview(formDirective)">
 
-	<textarea class="comment-textarea" matInput formControlName="comment"></textarea>
+	<textarea class="comment-textarea" formControlName="comment"></textarea>
 	<div class="rating">
 		<p>Rating
 			<ngb-rating formControlName="rating" [max]="5" [readonly]="false">
