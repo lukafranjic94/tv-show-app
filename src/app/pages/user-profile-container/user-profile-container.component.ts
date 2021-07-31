@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, merge, Observable, Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from 'src/app/services/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
@@ -11,7 +12,12 @@ import { UserService } from 'src/app/services/user/user.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileContainerComponent {
-	public user$: Observable<User> = this.userService.getUser();
+	private fetchTrigger$: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
+	public user$: Observable<User> = this.fetchTrigger$.pipe(
+		switchMap(() => {
+			return this.userService.getUser();
+		})
+	);
 	constructor(private authService: AuthService, private userService: UserService) {}
 
 	public drop(event: any): void {
@@ -36,7 +42,9 @@ export class UserProfileContainerComponent {
 			const file: File = fileArr[0];
 			const formData: FormData = new FormData();
 			formData.append('image', file);
-			this.userService.addProfileImage(formData).subscribe();
+			this.userService.addProfileImage(formData).subscribe(() => {
+				this.fetchTrigger$.next(undefined);
+			});
 		}
 	}
 }
