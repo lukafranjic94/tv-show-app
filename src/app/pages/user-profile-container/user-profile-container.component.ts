@@ -48,7 +48,7 @@ export class UserProfileContainerComponent {
 		const file: File = fileArr[0];
 		const imageRegExp: RegExp = new RegExp('^image*');
 
-		if (!imageRegExp.test(file.type)) {
+		if (!imageRegExp.test(file.type) || file.size > 1e6) {
 			return;
 		}
 
