@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Review } from 'src/app/services/review/review.model';
 
 @Component({
 	selector: 'app-review',
@@ -6,20 +7,14 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter
 	styleUrls: ['./review.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReviewComponent implements OnInit {
-	@Input() comment: string;
-	@Input() rating: number;
-	@Input() userEmail: string;
-	@Input() userImageUrl: string;
-	@Input() id: string;
-	@Input() currentUserEmail: string;
-	@Output() deleteReview: EventEmitter<string> = new EventEmitter();
+export class ReviewComponent {
+	@Input() public review: Review;
+	@Input() public currentUserEmail: string;
+	@Output() public deleteReview: EventEmitter<string> = new EventEmitter<string>();
 
 	constructor() {}
 
-	ngOnInit(): void {}
-
 	public onDeleteReview(): void {
-		this.deleteReview.emit(this.id);
+		this.deleteReview.emit(this.review.id);
 	}
 }

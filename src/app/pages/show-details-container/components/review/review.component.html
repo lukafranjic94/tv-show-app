@@ -1,20 +1,20 @@
 <div class="review">
 	<div class="info">
 		<div class="image-container">
-			<img class="image" [src]="userImageUrl" onerror="this.src='assets/images/placeholder_avatar.jpg'" alt="">
+			<img class="image" [src]="review.user.imageUrl" onerror="this.src='assets/images/placeholder_avatar.jpg'" alt="">
 		</div>
 		<div class="user-rating">
-			<p>{{ userEmail }}</p>
+			<p>{{ review.user.email }}</p>
 			<p>
-				{{ rating }}/5
-				<ngb-rating [(rate)]="rating" [readonly]="true" [max]="5"></ngb-rating>
+				{{ review.rating }}/5
+				<ngb-rating [(rate)]="review.rating" [readonly]="true" [max]="5"></ngb-rating>
 			</p>
 		</div>
 	</div>
 	<div class="content">
-		<p>{{ comment }}</p>
+		<p>{{ review.comment }}</p>
 	</div>
-	<ng-container *ngIf="userEmail === currentUserEmail">
+	<ng-container *ngIf="review.user.email === currentUserEmail">
 		<button class="menu-btn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 			<mat-icon>more_vert</mat-icon>
 		</button>

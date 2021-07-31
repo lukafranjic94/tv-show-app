@@ -1,7 +1,5 @@
 <ng-container *ngFor="let review of reviews">
-	<app-review [comment]="review.comment" [rating]="review.rating" [userEmail]="review.userEmail"
-		[userImageUrl]="review.userImageUrl" [id]="review.id" [currentUserEmail]="userEmail"
-		(deleteReview)="onDeleteReview($event)"></app-review>
+	<app-review [review]="review" [currentUserEmail]="userEmail" (deleteReview)="onDeleteReview($event)"></app-review>
 </ng-container>
 
 <div *ngIf="reviews.length===0">No reviews yet</div>

@@ -6,8 +6,8 @@
 		<h2 class="title">Reviews</h2>
 		<div class="reviews">
 			<app-review-form (addReview)="onAddReview($event)"></app-review-form>
-			<ng-container *ngIf="templateData.reviews && userEmail">
-				<app-review-list [reviews]="templateData.reviews" [userEmail]="userEmail"
+			<ng-container *ngIf="currentUserEmail$ | async as currentUserEmail">
+				<app-review-list [reviews]="templateData.reviews" [userEmail]="currentUserEmail"
 					(deleteReview)="onDeleteReview($event)">
 				</app-review-list>
 			</ng-container>

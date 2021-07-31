@@ -7,11 +7,13 @@ import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+import { User } from 'src/app/services/user/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
 	show: Show | undefined;
-	reviews: Array<Review> | undefined;
+	reviews: Array<Review>;
 }
 
 export interface IReviewData {
@@ -27,7 +29,7 @@ export interface IReviewData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDetailsContainerComponent {
-	public userEmail: string | undefined = this.authService.getAuthData()?.uid;
+	public currentUserEmail$: Observable<string> = this.userService.getUser().pipe(map((user: User) => user.email));
 	private fetchTrigger$: Subject<void> = new Subject();
 	public templateData$: Observable<ITemplateData | undefined> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
 		switchMap(() => {
@@ -37,7 +39,7 @@ export class ShowDetailsContainerComponent {
 			}
 			return throwError('Something went wrong');
 		}),
-		map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
+		map(([show, reviews]: [Show | undefined, Array<Review>]) => {
 			return {
 				show,
 				reviews,
@@ -53,7 +55,7 @@ export class ShowDetailsContainerComponent {
 		private showService: ShowService,
 		private route: ActivatedRoute,
 		private reviewService: ReviewService,
-		private authService: AuthService
+		private userService: UserService
 	) {}
 
 	public onAddReview(reviewFormData: IReviewFormData): void {
