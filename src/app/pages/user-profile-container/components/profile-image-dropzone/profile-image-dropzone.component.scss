@@ -1,0 +1,35 @@
+@use 'utils/colors';
+
+.image-dropzone {
+	padding: 130px;
+	border-radius: 24px;
+	border: 1px dashed colors.$light-purple;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+	background-color: colors.$purple;
+}
+
+.dropzone-text {
+	margin-top: 25px;
+	font-size: 20pt;
+	color: colors.$light-purple;
+}
+
+.user-image {
+	margin-top: 40px;
+	width: 260px;
+	height: 260px;
+	border-radius: 50%;
+	display: block;
+}
+
+.image-upload-btn {
+	margin-top: 30px;
+}
+
+.input-file {
+	display: none;
+}

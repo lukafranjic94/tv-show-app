@@ -3,19 +3,8 @@
 		<div class="user-info">
 			<h4>EMAIL</h4>
 			<p>{{ user.email }}</p>
+			<app-profile-image-dropzone [userImageUrl]="user.imageUrl" (selectImage)="handleFiles($event)">
+			</app-profile-image-dropzone>
 		</div>
-		<input #fileInput accept="image/*" (change)="handleFiles(fileInput.files)" class="input-file" type="file">
-		<ng-container *ngIf="user.imageUrl; else dropZone">
-			<img class="user-image" [src]="user.imageUrl">
-			<button (click)="fileInput.click()" class="image-upload-btn" mat-raised-button color="primary">UPLOAD
-				IMAGE</button>
-		</ng-container>
-		<ng-template #dropZone>
-			<div (click)="fileInput.click()" (dragover)="dragOver($event)" (drop)="drop($event)"
-				(dragenter)="dragEnter($event)" class="image-dropzone">
-				<img src="assets/images/profile_placeholder_logo.svg" alt="">
-				<p class="dropzone-text">Drop your photo here</p>
-			</div>
-		</ng-template>
 	</div>
 </ng-container>

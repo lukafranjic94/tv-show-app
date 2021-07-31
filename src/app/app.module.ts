@@ -39,6 +39,7 @@ import { ShowDetailsContainerComponent } from './pages/show-details-container/sh
 import { TopRatedContainerComponent } from './pages/top-rated-container/top-rated-container.component';
 import { UserProfileContainerComponent } from './pages/user-profile-container/user-profile-container.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { ProfileImageDropzoneComponent } from './pages/user-profile-container/components/profile-image-dropzone/profile-image-dropzone.component';
 
 @NgModule({
 	declarations: [
@@ -64,6 +65,7 @@ import { MatMenuModule } from '@angular/material/menu';
 		SidenavComponent,
 		TopRatedContainerComponent,
 		UserProfileContainerComponent,
+  ProfileImageDropzoneComponent,
 	],
 	imports: [
 		AppRoutingModule,

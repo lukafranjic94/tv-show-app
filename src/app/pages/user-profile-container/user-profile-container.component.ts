@@ -19,26 +19,6 @@ export class UserProfileContainerComponent {
 	);
 	constructor(private userService: UserService) {}
 
-	public drop(event: DragEvent): void {
-		this.preventDefaults(event);
-		if (event.dataTransfer) {
-			this.handleFiles(event.dataTransfer.files);
-		}
-	}
-
-	public dragOver(event: DragEvent): void {
-		this.preventDefaults(event);
-	}
-
-	public dragEnter(event: DragEvent): void {
-		this.preventDefaults(event);
-	}
-
-	private preventDefaults(event: Event): void {
-		event.stopPropagation();
-		event.preventDefault();
-	}
-
 	public handleFiles(files: FileList | null): void {
 		if (!files || files.length !== 1) {
 			return;

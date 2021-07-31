@@ -1,0 +1,13 @@
+<input #fileInput accept="image/*" (change)="emitFileList(fileInput.files)" class="input-file" type="file">
+<ng-container *ngIf="userImageUrl; else dropZone">
+	<img class="user-image" [src]="userImageUrl">
+	<button (click)="fileInput.click()" class="image-upload-btn" mat-raised-button color="primary">UPLOAD
+		IMAGE</button>
+</ng-container>
+<ng-template #dropZone>
+	<div (click)="fileInput.click()" (dragover)="dragOver($event)" (drop)="drop($event)" (dragenter)="dragEnter($event)"
+		class="image-dropzone">
+		<img src="assets/images/profile_placeholder_logo.svg" alt="">
+		<p class="dropzone-text">Drop your photo here</p>
+	</div>
+</ng-template>
