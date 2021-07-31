@@ -12,14 +12,14 @@ export class ProfileImageDropzoneComponent {
 
 	constructor() {}
 
-	public emitFileList(fileList: FileList | null): void {
+	public onSelectImage(fileList: FileList | null): void {
 		this.selectImage.emit(fileList);
 	}
 
 	public drop(event: DragEvent): void {
 		this.preventDefaults(event);
 		if (event.dataTransfer) {
-			this.emitFileList(event.dataTransfer.files);
+			this.onSelectImage(event.dataTransfer.files);
 		}
 	}
 

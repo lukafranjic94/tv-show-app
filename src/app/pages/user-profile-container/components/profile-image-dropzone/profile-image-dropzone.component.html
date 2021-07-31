@@ -1,4 +1,4 @@
-<input #fileInput accept="image/*" (change)="emitFileList(fileInput.files)" class="input-file" type="file">
+<input #fileInput accept="image/*" (change)="onSelectImage(fileInput.files)" class="input-file" type="file">
 <ng-container *ngIf="userImageUrl; else dropZone">
 	<img class="user-image" [src]="userImageUrl">
 	<button (click)="fileInput.click()" class="image-upload-btn" mat-raised-button color="primary">UPLOAD
