@@ -14,6 +14,7 @@ import { IReviewFormData } from './components/review-form/review-form.component'
 interface ITemplateData {
 	show: Show;
 	reviews: Array<Review>;
+	currentUserEmail: string;
 }
 
 export interface IReviewData {
@@ -29,20 +30,24 @@ export interface IReviewData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDetailsContainerComponent {
-	public currentUserEmail$: Observable<string> = this.userService.getUser().pipe(map((user: User) => user.email));
 	private fetchTrigger$: Subject<void> = new Subject<void>();
 	public templateData$: Observable<ITemplateData | null> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
 		switchMap(() => {
 			const id: string | null = this.route.snapshot.paramMap.get('id');
 			if (id) {
-				return combineLatest([this.showService.getShow(id), this.reviewService.getReviewsForShowId(id)]);
+				return combineLatest([
+					this.showService.getShow(id),
+					this.reviewService.getReviewsForShowId(id),
+					this.userService.getUser().pipe(map((user: User) => user.email)),
+				]);
 			}
 			return throwError('Something went wrong');
 		}),
-		map(([show, reviews]: [Show, Array<Review>]) => {
+		map(([show, reviews, currentUserEmail]: [Show, Array<Review>, string]) => {
 			return {
 				show,
 				reviews,
+				currentUserEmail,
 			};
 		}),
 		catchError((error: Error) => {
@@ -51,6 +56,7 @@ export class ShowDetailsContainerComponent {
 		})
 	);
 	public errorObject: Error;
+
 	constructor(
 		private showService: ShowService,
 		private route: ActivatedRoute,
