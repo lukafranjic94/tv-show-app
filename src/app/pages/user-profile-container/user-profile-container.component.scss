@@ -19,6 +19,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	cursor: pointer;
 }
 
 .dropzone-text {
@@ -32,4 +33,13 @@
 	width: 260px;
 	height: 260px;
 	border-radius: 50%;
+	display: block;
+}
+
+.image-upload-btn {
+	margin-top: 30px;
+}
+
+.input-file {
+	display: none;
 }

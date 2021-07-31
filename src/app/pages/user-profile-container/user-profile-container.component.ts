@@ -30,9 +30,9 @@ export class UserProfileContainerComponent {
 		event.stopPropagation();
 	}
 
-	private handleFiles(files: FileList): void {
-		const fileArr: Array<File> = Array.from(files);
-		if (fileArr.length === 1) {
+	public handleFiles(files: FileList | null): void {
+		if (files && files.length === 1) {
+			const fileArr: Array<File> = Array.from(files);
 			const file: File = fileArr[0];
 			const formData: FormData = new FormData();
 			formData.append('image', file);
