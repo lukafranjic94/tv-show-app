@@ -1,12 +1,17 @@
-<ng-container *ngIf="email">
+<ng-container *ngIf="user$ | async as user">
 	<div class="profile">
 		<div class="user-info">
 			<h4>EMAIL</h4>
-			<p>{{ email }}</p>
+			<p>{{ user.email }}</p>
 		</div>
-		<div class="image-dropzone">
-			<img class="image" src="assets/images/profile_placeholder_logo.svg" alt="">
-			<p class="dropzone-text">Drop your photo here</p>
-		</div>
+		<ng-container *ngIf="user.imageUrl; else dropZone">
+			<img class="user-image" [src]="user.imageUrl">
+		</ng-container>
+		<ng-template #dropZone>
+			<div (dragover)="dragOver($event)" (drop)="drop($event)" (dragleave)="dragLeave($event)" class="image-dropzone">
+				<img src="assets/images/profile_placeholder_logo.svg" alt="">
+				<p class="dropzone-text">Drop your photo here</p>
+			</div>
+		</ng-template>
 	</div>
 </ng-container>

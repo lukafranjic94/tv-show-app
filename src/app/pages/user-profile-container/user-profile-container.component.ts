@@ -1,5 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { User } from 'src/app/services/user/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
 	selector: 'app-user-profile-container',
@@ -7,11 +10,33 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 	styleUrls: ['./user-profile-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserProfileContainerComponent implements OnInit {
-	public email: string | undefined;
-	constructor(private authService: AuthService) {}
+export class UserProfileContainerComponent {
+	public user$: Observable<User> = this.userService.getUser();
+	constructor(private authService: AuthService, private userService: UserService) {}
 
-	ngOnInit(): void {
-		this.email = this.authService.getAuthData()?.uid;
+	public drop(event: any): void {
+		event.preventDefault();
+		event.stopPropagation();
+		this.handleFiles(event.dataTransfer.files);
+	}
+
+	public dragOver(event: any): void {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	public dragLeave(event: any): void {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	private handleFiles(files: FileList): void {
+		const fileArr: Array<File> = Array.from(files);
+		if (fileArr.length === 1) {
+			const file: File = fileArr[0];
+			const formData: FormData = new FormData();
+			formData.append('image', file);
+			this.userService.addProfileImage(formData).subscribe();
+		}
 	}
 }
