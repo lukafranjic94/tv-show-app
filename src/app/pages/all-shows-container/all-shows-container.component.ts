@@ -11,8 +11,8 @@ import { ShowService } from 'src/app/services/show/show.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllShowsContainerComponent implements OnInit {
-	public shows$: Observable<Array<Show> | undefined>;
-	public errorObject: Error | null = null;
+	public shows$: Observable<Array<Show> | null>;
+	public errorObject: Error;
 
 	constructor(private showService: ShowService) {}
 	ngOnInit(): void {
@@ -20,7 +20,7 @@ export class AllShowsContainerComponent implements OnInit {
 			retry(1),
 			catchError((error: Error) => {
 				this.errorObject = error;
-				return of(undefined);
+				return of(null);
 			})
 		);
 	}

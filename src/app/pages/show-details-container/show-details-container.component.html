@@ -1,7 +1,5 @@
 <ng-container *ngIf="templateData$ | async as templateData; else loadingOrError">
-	<ng-container *ngIf="templateData.show">
-		<app-show-details [show]="templateData.show"></app-show-details>
-	</ng-container>
+	<app-show-details [show]="templateData.show"></app-show-details>
 	<div class="review-section">
 		<h2 class="title">Reviews</h2>
 		<div class="reviews">

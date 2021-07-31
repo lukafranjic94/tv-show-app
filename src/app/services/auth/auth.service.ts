@@ -12,7 +12,7 @@ import { StorageService } from '../storage/storage.service';
 	providedIn: 'root',
 })
 export class AuthService {
-	private readonly authDataKey = 'authData';
+	private readonly authDataKey: string = 'authData';
 	private _isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(Boolean(this.getAuthData()));
 	public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
 	private baseUrl: string = environment.baseUrl;

@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
-	show: Show | undefined;
+	show: Show;
 	reviews: Array<Review>;
 }
 
@@ -30,8 +30,8 @@ export interface IReviewData {
 })
 export class ShowDetailsContainerComponent {
 	public currentUserEmail$: Observable<string> = this.userService.getUser().pipe(map((user: User) => user.email));
-	private fetchTrigger$: Subject<void> = new Subject();
-	public templateData$: Observable<ITemplateData | undefined> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
+	private fetchTrigger$: Subject<void> = new Subject<void>();
+	public templateData$: Observable<ITemplateData | null> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
 		switchMap(() => {
 			const id: string | null = this.route.snapshot.paramMap.get('id');
 			if (id) {
@@ -39,7 +39,7 @@ export class ShowDetailsContainerComponent {
 			}
 			return throwError('Something went wrong');
 		}),
-		map(([show, reviews]: [Show | undefined, Array<Review>]) => {
+		map(([show, reviews]: [Show, Array<Review>]) => {
 			return {
 				show,
 				reviews,
@@ -47,7 +47,7 @@ export class ShowDetailsContainerComponent {
 		}),
 		catchError((error: Error) => {
 			this.errorObject = error;
-			return of(undefined);
+			return of(null);
 		})
 	);
 	public errorObject: Error;

@@ -12,6 +12,9 @@ import { Review } from './review.model';
 })
 export class ReviewService {
 	private baseUrl: string = environment.baseUrl;
+
+	constructor(private http: HttpClient) {}
+
 	public getReviewsForShowId(showId: string): Observable<Array<Review>> {
 		return this.http
 			.get<{ reviews: Array<IRawReview> }>(`${this.baseUrl}${ApiPaths.Shows}/${showId}${ApiPaths.Reviews}`)
@@ -28,9 +31,7 @@ export class ReviewService {
 			.pipe(map((response) => new Review(response.review)));
 	}
 
-	public deleteReview(reviewId: string): Observable<any> {
-		return this.http.delete(`${this.baseUrl}${ApiPaths.Reviews}/${reviewId}`);
+	public deleteReview(reviewId: string): Observable<void> {
+		return this.http.delete<void>(`${this.baseUrl}${ApiPaths.Reviews}/${reviewId}`);
 	}
-
-	constructor(private http: HttpClient) {}
 }

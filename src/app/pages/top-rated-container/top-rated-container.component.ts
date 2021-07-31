@@ -11,7 +11,7 @@ import { ShowService } from 'src/app/services/show/show.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopRatedContainerComponent implements OnInit {
-	public shows$: Observable<Array<Show> | undefined>;
+	public shows$: Observable<Array<Show> | null>;
 	public errorObject: Error | null = null;
 
 	constructor(private showService: ShowService) {}
@@ -21,7 +21,7 @@ export class TopRatedContainerComponent implements OnInit {
 			retry(1),
 			catchError((error) => {
 				this.errorObject = error;
-				return of(undefined);
+				return of(null);
 			})
 		);
 	}
