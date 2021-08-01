@@ -3,6 +3,12 @@
 	padding: 50px;
 }
 
+@media screen and (max-width: 959px) {
+	.login {
+		box-shadow: none;
+	}
+}
+
 .form-field {
 	width: 100%;
 }
