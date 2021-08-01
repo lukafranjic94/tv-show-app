@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, merge, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';

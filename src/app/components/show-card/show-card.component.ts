@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-show-card',
@@ -6,16 +6,10 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 	styleUrls: ['./show-card.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShowCardComponent implements OnInit {
+export class ShowCardComponent {
 	@Input() public title: string;
 	@Input() public averageRating: number;
 	@Input() public imageUrl: string;
 
 	constructor() {}
-
-	public logTitle(): void {
-		console.log(this.title);
-	}
-
-	ngOnInit(): void {}
 }

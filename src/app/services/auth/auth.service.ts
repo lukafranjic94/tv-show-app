@@ -2,9 +2,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AuthData } from 'src/app/interfaces/auth-data.interface';
-import { LoginFormData } from 'src/app/pages/login-container/components/login-form/login-form.component';
-import { RegistrationFormData } from 'src/app/pages/registration-container/components/registration-form/registration-form.component';
+import { IAuthData } from 'src/app/interfaces/auth-data.interface';
+import { ILoginFormData } from 'src/app/pages/login-container/components/login-form/login-form.component';
+import { IRegistrationFormData } from 'src/app/pages/registration-container/components/registration-form/registration-form.component';
 import { ApiPaths, environment } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
 
@@ -19,7 +19,7 @@ export class AuthService {
 
 	constructor(private http: HttpClient, private storageService: StorageService) {}
 
-	public onRegister(registrationFormData: RegistrationFormData): Observable<any> {
+	public register(registrationFormData: IRegistrationFormData): Observable<any> {
 		return this.http
 			.post<HttpResponse<any>>(
 				`${this.baseUrl}${ApiPaths.Auth}`,
@@ -33,7 +33,7 @@ export class AuthService {
 			.pipe(tap(this.handleResponse.bind(this)));
 	}
 
-	public onLogin(loginFormData: LoginFormData): Observable<any> {
+	public logIn(loginFormData: ILoginFormData): Observable<any> {
 		return this.http
 			.post<HttpResponse<any>>(`${this.baseUrl}${ApiPaths.Auth}/sign_in`, loginFormData, { observe: 'response' })
 			.pipe(tap(this.handleResponse.bind(this)));
@@ -50,16 +50,16 @@ export class AuthService {
 		}
 	}
 
-	public onLogout(): void {
+	public logOut(): void {
 		this.storageService.remove(this.authDataKey);
 		this._isLoggedIn$.next(false);
 	}
 
-	public saveAuthData(authData: AuthData): void {
+	public saveAuthData(authData: IAuthData): void {
 		this.storageService.add(this.authDataKey, authData);
 	}
 
-	public getAuthData(): AuthData | null {
+	public getAuthData(): IAuthData | null {
 		return this.storageService.get(this.authDataKey);
 	}
 }

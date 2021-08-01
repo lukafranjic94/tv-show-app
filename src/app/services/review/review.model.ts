@@ -7,6 +7,7 @@ export class Review {
 	public id: string;
 	public showId: string;
 	public user: User;
+
 	constructor(rawReview: IRawReview) {
 		this.comment = rawReview.comment;
 		this.rating = rawReview.rating;

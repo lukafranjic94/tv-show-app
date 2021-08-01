@@ -1,5 +1,4 @@
-import { EmitterVisitorContext } from '@angular/compiler';
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import {
 	AbstractControl,
 	FormBuilder,
@@ -13,7 +12,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { palindromeValidator } from 'src/app/validators/palindrome.validator';
 import { passwordConfirmationValidator } from 'src/app/validators/password-confirmation.validator';
 
-export interface RegistrationFormData {
+export interface IRegistrationFormData {
 	email: string;
 	password: string;
 	passwordConfirmation: string;
@@ -36,8 +35,8 @@ class PasswordGroupStateMatcher implements ErrorStateMatcher {
 	styleUrls: ['./registration-form.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationFormComponent implements OnInit {
-	@Output() register: EventEmitter<RegistrationFormData> = new EventEmitter();
+export class RegistrationFormComponent {
+	@Output() public register: EventEmitter<IRegistrationFormData> = new EventEmitter<IRegistrationFormData>();
 	public passwordGroupStateMatcher: PasswordGroupStateMatcher = new PasswordGroupStateMatcher(['passwordConfirmation']);
 	public registrationFormGroup: FormGroup = this.fb.group(
 		{
@@ -49,8 +48,6 @@ export class RegistrationFormComponent implements OnInit {
 	);
 
 	constructor(private fb: FormBuilder) {}
-
-	ngOnInit(): void {}
 
 	public onRegister(): void {
 		this.register.emit(this.registrationFormGroup.value);

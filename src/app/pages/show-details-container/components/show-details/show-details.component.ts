@@ -7,10 +7,8 @@ import { Show } from 'src/app/services/show/show.model';
 	styleUrls: ['./show-details.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShowDetailsComponent implements OnInit {
+export class ShowDetailsComponent {
 	@Input() show: Show;
 
 	constructor() {}
-
-	ngOnInit(): void {}
 }

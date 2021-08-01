@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IUser } from 'src/app/interfaces/user.interface';
+import { IRawUser } from 'src/app/interfaces/user.interface';
 import { ApiPaths, environment } from 'src/environments/environment';
 import { User } from './user.model';
 
@@ -15,7 +15,7 @@ export class UserService {
 	constructor(private http: HttpClient) {}
 
 	public addProfileImage(profileImageData: FormData): Observable<User> {
-		return this.http.put<{ user: IUser }>(`${this.baseUrl}${ApiPaths.Auth}`, profileImageData).pipe(
+		return this.http.put<{ user: IRawUser }>(`${this.baseUrl}${ApiPaths.Auth}`, profileImageData).pipe(
 			map((response) => {
 				return new User(response.user);
 			})
@@ -23,7 +23,7 @@ export class UserService {
 	}
 
 	public getUser(): Observable<User> {
-		return this.http.get<{ user: IUser }>(`${this.baseUrl}${ApiPaths.Auth}/me`).pipe(
+		return this.http.get<{ user: IRawUser }>(`${this.baseUrl}${ApiPaths.Auth}/me`).pipe(
 			map((response) => {
 				return new User(response.user);
 			})

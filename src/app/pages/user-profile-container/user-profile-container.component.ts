@@ -17,6 +17,7 @@ export class UserProfileContainerComponent {
 			return this.userService.getUser();
 		})
 	);
+
 	constructor(private userService: UserService) {}
 
 	public handleFiles(files: FileList | null): void {
