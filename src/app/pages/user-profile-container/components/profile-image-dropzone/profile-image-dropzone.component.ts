@@ -16,18 +16,18 @@ export class ProfileImageDropzoneComponent {
 		this.selectImage.emit(fileList);
 	}
 
-	public drop(event: DragEvent): void {
+	public onDrop(event: DragEvent): void {
 		this.preventDefaults(event);
 		if (event.dataTransfer) {
 			this.onSelectImage(event.dataTransfer.files);
 		}
 	}
 
-	public dragOver(event: DragEvent): void {
+	public onDragOver(event: DragEvent): void {
 		this.preventDefaults(event);
 	}
 
-	public dragEnter(event: DragEvent): void {
+	public onDragEnter(event: DragEvent): void {
 		this.preventDefaults(event);
 	}
 

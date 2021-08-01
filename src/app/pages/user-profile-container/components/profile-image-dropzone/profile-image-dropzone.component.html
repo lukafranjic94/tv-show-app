@@ -5,8 +5,8 @@
 		IMAGE</button>
 </ng-container>
 <ng-template #dropZone>
-	<div (click)="fileInput.click()" (dragover)="dragOver($event)" (drop)="drop($event)" (dragenter)="dragEnter($event)"
-		class="image-dropzone">
+	<div (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)"
+		(dragenter)="onDragEnter($event)" class="image-dropzone">
 		<img src="assets/images/profile_placeholder_logo.svg" alt="">
 		<p class="dropzone-text">Drop your photo here</p>
 	</div>
