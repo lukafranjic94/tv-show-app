@@ -1,7 +1,7 @@
 <div class="review">
 	<div class="info">
 		<div class="image-container">
-			<img class="image" [src]="review.user.imageUrl" onerror="this.src='assets/images/placeholder_avatar.jpg'" alt="">
+			<img class="image" [src]="review.user.imageUrl || 'assets/images/placeholder_avatar.jpg'" alt="">
 		</div>
 		<div class="user-rating">
 			<p>{{ review.user.email }}</p>
