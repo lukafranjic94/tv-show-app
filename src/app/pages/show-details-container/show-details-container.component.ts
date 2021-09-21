@@ -2,16 +2,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, merge, Observable, of, Subject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { Review } from 'src/app/services/review/review.model';
 import { ReviewService } from 'src/app/services/review/review.service';
 import { Show } from 'src/app/services/show/show.model';
 import { ShowService } from 'src/app/services/show/show.service';
+import { User } from 'src/app/services/user/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 import { IReviewFormData } from './components/review-form/review-form.component';
 
 interface ITemplateData {
-	show: Show | undefined;
-	reviews: Array<Review> | undefined;
+	show: Show;
+	reviews: Array<Review>;
+	currentUserEmail: string;
 }
 
 export interface IReviewData {
@@ -27,33 +29,38 @@ export interface IReviewData {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDetailsContainerComponent {
-	public userEmail: string | undefined = this.authService.getAuthData()?.uid;
-	private fetchTrigger$: Subject<void> = new Subject();
-	public templateData$: Observable<ITemplateData | undefined> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
+	private fetchTrigger$: Subject<void> = new Subject<void>();
+	public templateData$: Observable<ITemplateData | null> = merge(this.route.paramMap, this.fetchTrigger$).pipe(
 		switchMap(() => {
 			const id: string | null = this.route.snapshot.paramMap.get('id');
 			if (id) {
-				return combineLatest([this.showService.getShow(id), this.reviewService.getReviewsForShowId(id)]);
+				return combineLatest([
+					this.showService.getShow(id),
+					this.reviewService.getReviewsForShowId(id),
+					this.userService.getUser().pipe(map((user: User) => user.email)),
+				]);
 			}
 			return throwError('Something went wrong');
 		}),
-		map(([show, reviews]: [Show | undefined, Array<Review> | undefined]) => {
+		map(([show, reviews, currentUserEmail]: [Show, Array<Review>, string]) => {
 			return {
 				show,
 				reviews,
+				currentUserEmail,
 			};
 		}),
 		catchError((error: Error) => {
 			this.errorObject = error;
-			return of(undefined);
+			return of(null);
 		})
 	);
 	public errorObject: Error;
+
 	constructor(
 		private showService: ShowService,
 		private route: ActivatedRoute,
 		private reviewService: ReviewService,
-		private authService: AuthService
+		private userService: UserService
 	) {}
 
 	public onAddReview(reviewFormData: IReviewFormData): void {

@@ -28,8 +28,8 @@ export class MainLayoutComponent {
 		);
 	}
 
-	public logOut(): void {
-		this.authService.onLogout();
+	public onLogOut(): void {
+		this.authService.logOut();
 		this.router.navigate(['/login']);
 	}
 }

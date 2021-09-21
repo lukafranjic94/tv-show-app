@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { RegistrationFormData } from './components/registration-form/registration-form.component';
+import { IRegistrationFormData } from './components/registration-form/registration-form.component';
 
 @Component({
 	selector: 'app-registration-container',
@@ -11,23 +11,21 @@ import { RegistrationFormData } from './components/registration-form/registratio
 	styleUrls: ['./registration-container.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationContainerComponent implements OnInit {
+export class RegistrationContainerComponent {
 	public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 	constructor(private authService: AuthService, private router: Router) {}
 
-	ngOnInit(): void {}
-
-	public onRegister(registrationFormData: RegistrationFormData): void {
+	public onRegister(registrationFormData: IRegistrationFormData): void {
 		this.isLoading$.next(true);
 		this.authService
-			.onRegister(registrationFormData)
+			.register(registrationFormData)
 			.pipe(
 				finalize(() => {
 					this.isLoading$.next(false);
 				})
 			)
-			.subscribe((registrationFormData: RegistrationFormData) => {
-				console.log(registrationFormData);
+			.subscribe(() => {
 				this.router.navigate(['']);
 			});
 	}

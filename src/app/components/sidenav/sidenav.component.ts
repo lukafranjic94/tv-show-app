@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ILink } from 'src/app/interfaces/link.interface';
-import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
 	selector: 'app-sidenav',

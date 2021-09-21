@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IRawUser {
 	id: string;
 	email: string;
 	image_url: string;

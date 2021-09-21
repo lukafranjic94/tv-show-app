@@ -1,5 +1,4 @@
 import { IRawShow } from 'src/app/interfaces/rawShow.interface';
-import { Review } from '../review/review.model';
 
 export class Show {
 	public title: string;
@@ -7,6 +6,7 @@ export class Show {
 	public imageUrl: string;
 	public id: string;
 	public averageRating: number;
+
 	constructor(rawShow: IRawShow) {
 		this.title = rawShow.title;
 		this.description = rawShow.description;
@@ -14,6 +14,7 @@ export class Show {
 		this.averageRating = rawShow.average_rating;
 		this.id = rawShow.id;
 	}
+
 	public calcPercentageRating(): number {
 		const percentageRating: number = (100 * (this.averageRating - 1)) / (5 - 1);
 		return percentageRating;

@@ -8,12 +8,13 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	padding: 40px;
+	padding: 40px 20px;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 959px) {
 	.content {
 		margin-top: 25px;
+		order: 3;
 	}
 	.review {
 		flex-direction: column;
@@ -25,16 +26,13 @@
 	.info {
 		order: 1;
 	}
-	.content {
-		order: 3;
-	}
 }
 
 .info {
 	flex: 1;
 	display: flex;
+	margin-right: 25px;
 	align-items: center;
-	padding-right: 25px;
 	p {
 		margin: 0;
 	}
@@ -43,6 +41,8 @@
 
 .content {
 	flex: 3;
+	max-width: 100%;
+	word-wrap: break-word;
 }
 
 .image {
@@ -57,9 +57,5 @@
 
 .user-rating {
 	min-width: 0;
-	width: 100%;
-	p {
-		width: 100%;
-		word-wrap: break-word;
-	}
+	word-wrap: break-word;
 }
